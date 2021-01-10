@@ -1,16 +1,18 @@
 from flask import Flask, request, jsonify, make_response, Response
 from flask_restplus import Api, Resource, fields
 
-import joblib
-from nltk import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 import numpy as np
 import pandas as pd
 import json
 
+import joblib
+from nltk import word_tokenize
+
 from basic_metrics import BasicMetrics
 from lexical_diversity import LexicalDiversity
+from lexical_density import LexicalDensity
 
 flask_app = Flask(__name__)
 app = Api(app = flask_app, 
@@ -47,7 +49,7 @@ class MainClass(Resource):
 			n_lines = BasicMetrics.n_lines(text)
 			n_words = BasicMetrics.tokens(text)
 			lexicalDiversity = LexicalDiversity.ttr(text)
-			lexicalDensity = 0
+			lexicalDensity = LexicalDensity.ureDel(text)
 
 			# Response
 			response = '{"statusCode": 200, "status": "Query made", "pos": "' + str(pos_tagger.tag(word_tokenize(text))) \
