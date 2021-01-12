@@ -12,7 +12,7 @@ class BasicMetrics(object):
         return lines
     
     @staticmethod
-    def occurrences(text):
+    def wordsList(text):
         text = text.replace(".",'')
         text = text.replace(",",'')
         text = text.replace(":",'')
@@ -26,13 +26,13 @@ class BasicMetrics(object):
     
     @staticmethod
     def tokens(text):
-        words = BasicMetrics.occurrences(text)
+        words = BasicMetrics.wordsList(text)
         
         return len(words)
 
     @staticmethod
     def types(text):
-        words = BasicMetrics.occurrences(text)
+        words = BasicMetrics.wordsList(text)
         diff_words = Counter(words)
 
         return len(diff_words.items())
