@@ -17,7 +17,7 @@ class BasicMetrics(object):
         text = text.replace(",",'')
         text = text.replace(":",'')
         text = text.lower()
-        result = re.split("[^a-zA-z0-9]+", text)
+        result = re.split("[^\w]+", text)
         
         if (result[-1] == ''):
             result.pop()
@@ -31,8 +31,11 @@ class BasicMetrics(object):
         return len(words)
 
     @staticmethod
-    def types(text):
-        words = BasicMetrics.wordsList(text)
-        diff_words = Counter(words)
+    def types(text):        
+        return len(BasicMetrics.frequencies(text))
 
-        return len(diff_words.items())
+    
+    @staticmethod
+    def frequencies(text):
+        words = BasicMetrics.wordsList(text)
+        return Counter(words)

@@ -48,16 +48,21 @@ class MainClass(Resource):
 			# Processing
 			n_lines = BasicMetrics.n_lines(text)
 			n_words = BasicMetrics.tokens(text)
+			types = BasicMetrics.types(text)
+			frequencies = dict(BasicMetrics.frequencies(text))
 			lexicalDiversity = LexicalDiversity.ttr(text)
 			lexicalDensity = LexicalDensity.ureDel(text)
+			pos = dict(pos_tagger.tag(word_tokenize(text)))
 
 			# Response
-			response = '{"statusCode": 200, "status": "Query made", "pos": "' + str(pos_tagger.tag(word_tokenize(text))) \
-				+ '", "dil": ' + str(lexicalDiversity) \
+			response = '{"statusCode": 200, "status": "Query made", "pos": ' + json.dumps(pos, ensure_ascii=False) \
+				+ ', "dil": ' + str(lexicalDiversity) \
 					+  ', "del": ' + str(lexicalDensity) + \
 						', "n_lines": ' + str(n_lines) + \
-							', "n_words": ' + str(n_words) + '}'
-			response = Response(json.dumps(json.loads(response)), mimetype='application/json')
+							', "n_words": ' + str(n_words) + \
+								', "types": ' + str(types) + \
+									', "frequencies": ' + json.dumps(frequencies, ensure_ascii=False) + '}'
+			response = Response(json.dumps(json.loads(response), ensure_ascii=False), mimetype='application/json')
 			response.headers.add('Access-Control-Allow-Origin', '*')
 			return response
 		except Exception as error:
