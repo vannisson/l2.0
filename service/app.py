@@ -52,7 +52,7 @@ class MainClass(Resource):
 			frequencies = dict(BasicMetrics.frequencies(text))
 			lexicalDiversity = LexicalDiversity.ttr(text)
 			lexicalDensity = LexicalDensity.ureDel(text)
-			pos = dict(pos_tagger.tag(word_tokenize(text)))
+			pos = dict(pos_tagger.tag(word_tokenize(text.lower())))
 
 			# Response
 			response = '{"statusCode": 200, "status": "Query made", "pos": ' + json.dumps(pos, ensure_ascii=False) \
