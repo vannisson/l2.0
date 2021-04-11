@@ -1,5 +1,5 @@
-# Lexicanalytics 2
-Lexicanalytics is a tool to support linguistics and education researchers/professionals on extracting relevant lexical info from texts, e. g. Lexical Diversity, Lexical Density, Words Frequencies.
+# Lexicanalytics Web
+Lexicanalytics is a web plataform to support linguistics and education researchers/professionals on extracting relevant lexical info from texts, e. g. Lexical Diversity, Lexical Density, Words Frequencies.
 
 ## What is underneath?
 While the previous version of Lexicanalytics was developed in Java, this one is a web service running over a **flask** backend server and **react-components/nodejs** client-side frontend.
