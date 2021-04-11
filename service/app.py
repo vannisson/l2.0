@@ -1,11 +1,14 @@
-from flask import Flask, request, jsonify, make_response, Response
+from flask import Flask, request, jsonify, make_response, Response, request, render_template
 from flask_restplus import Api, Resource, fields
+from flask_session import Session
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 import numpy as np
 import pandas as pd
 import json
+import os
+from pathlib import Path
 
 import joblib
 from nltk import word_tokenize
@@ -14,22 +17,40 @@ from basic_metrics import BasicMetrics
 from lexical_diversity import LexicalDiversity
 from lexical_density import LexicalDensity
 
-flask_app = Flask(__name__)
-app = Api(app = flask_app, 
+app = Flask(__name__)
+
+# Session config
+source_path = Path(Path(os.getcwd()))
+app.config['UPLOAD_FOLDER'] = os.path.join(str(source_path), 'Uploads')
+SESSION_TYPE = 'filesystem'
+app.config.from_object(__name__)
+Session(app)
+
+# API Config
+api = Api(app = app, 
 		  version = "0.1", 
 		  title = "Lexicanalytics Web", 
 		  description = "Relevant lexical info from texts, e. g. Lexical Diversity, Lexical Density, Words Frequencies.")
 
-name_space = app.namespace('analyze', description='Gets text and returns info.')
+name_space = api.namespace('analyze', description='Gets text and returns info.')
 
-model = app.model('Analyze params', 
+model = api.model('Analyze params', 
 				  {'text': fields.String(required = True, 
 				  							   description="Text", 
     					  				 	   help="Text can not be blank")})
 				
-
 pos_tagger = joblib.load('pkl/POS_tagger_brill.pkl')
 
+# Render html
+@app.route('/index', methods=['POST', 'GET'])
+def display_index():
+    #user_id = request.cookies
+    #session_id = request.cookies['session']
+    #files = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], session_id))
+    #print('user:', user_id)
+    return render_template('index.html')
+
+# API request reponses
 @name_space.route("/")
 class MainClass(Resource):
 
@@ -40,7 +61,7 @@ class MainClass(Resource):
 		response.headers.add('Access-Control-Allow-Methods', "*")
 		return response
 
-	@app.expect(model)		
+	@api.expect(model)		
 	def post(self):
 		try: 
 			formData = request.json
