@@ -8,10 +8,6 @@ html,body {
     box-sizing: border-box; 
 }
 
-#results {
-    visibility: hidden;
-}
-
 #loading {
     visibility: hidden;
 }
