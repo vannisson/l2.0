@@ -98,18 +98,20 @@ class MainClass(Resource):
 			n_lines = BasicMetrics.n_lines(text)
 			n_words = BasicMetrics.tokens(text)
 			types = BasicMetrics.types(text)
-			frequencies = str(dict(BasicMetrics.frequencies(text)))
+			frequencies = dict(BasicMetrics.frequencies(text))
 			lexicalDiversity = LexicalDiversity.ttr(text)
-			lexicalDensity = LexicalDensity.ureDel(text)
-			pos = str(dict(pos_tagger.tag(word_tokenize(text.lower()))))
+			lexicalDensity = LexicalDensity.hallidayDel(text)
+			pos = dict(pos_tagger.tag(word_tokenize(text.lower())))
+
+			pos_subs, pos_verbs, pos_adj, pos_adv, pos_others = LexicalDensity.count_lexical_items(pos, frequencies)
 
 			# Add analysis to database
-			new_row = {'text': text, 'n_lines': n_lines, 'n_words': n_words, 'types': types, 'frequencies': frequencies, 'lexicalDiversity': lexicalDiversity, 'lexicalDensity': lexicalDensity, 'pos': pos}
+			new_row = {'text': text, 'n_lines': n_lines, 'n_words': n_words, 'types': types, 'frequencies': str(frequencies), 'lexicalDiversity': lexicalDiversity, 'lexicalDensity': lexicalDensity, 'pos': str(pos), 'pos_subs': pos_subs, 'pos_verbs': pos_verbs, 'pos_adj': pos_adj, 'pos_adv': pos_adv, 'pos_others': pos_others}
 			if (os.path.exists(csv_filepath)):
 				productions = pd.read_csv(csv_filepath)
 				productions = productions.append(new_row, ignore_index=True)
 			else:
-				productions = pd.DataFrame(data=new_row, index=[0], columns=['text', 'n_lines', 'n_words', 'types', 'frequencies', 'lexicalDiversity', 'lexicalDensity', 'pos'])
+				productions = pd.DataFrame(data=new_row, index=[0], columns=['text', 'n_lines', 'n_words', 'types', 'frequencies', 'lexicalDiversity', 'lexicalDensity', 'pos', 'pos_subs', 'pos_verbs', 'pos_adj', 'pos_adv', 'pos_others'])
 
 			print(productions)
 			
@@ -145,7 +147,12 @@ class MainClass(Resource):
 				"n_words": productions['n_words'].to_list(),
 				"types": productions['types'].to_list(),
 				"lexicalDensity": productions['lexicalDensity'].to_list(),
-				"lexicalDiversity": productions['lexicalDiversity'].to_list()
+				"lexicalDiversity": productions['lexicalDiversity'].to_list(),
+				"pos_subs": productions['pos_subs'].to_list(),
+				"pos_verbs": productions['pos_verbs'].to_list(),
+				"pos_adj": productions['pos_adj'].to_list(),
+				"pos_adv": productions['pos_adv'].to_list(),
+				"pos_others": productions['pos_others'].to_list()
 			})
 		response.headers.add('Access-Control-Allow-Origin', '*')
 		return response

@@ -1,5 +1,6 @@
 let pos_prod_pie;
 let general_line_chart;
+let pos_general_pie;
 
 function analyze(){
     // Makes results div visible
@@ -38,7 +39,64 @@ function get_stats() {
     $.getJSON({
         url: 'http://127.0.0.1:5000/stats/',
         success: function(data) {            
-            
+
+            // General statistics info
+            $('#mean_n_words').text(mean(data.n_words).toFixed(2))
+            $('#mean_types').text(mean(data.types).toFixed(2))
+            $('#mean_dil').text(mean(data.lexicalDiversity).toFixed(2))
+            $('#mean_del').text(mean(data.lexicalDensity).toFixed(2))
+            $('#mean_subs').text(mean(data.pos_subs).toFixed(2))
+            $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2))
+            $('#mean_adj').text(mean(data.pos_adj).toFixed(2))
+            $('#mean_adv').text(mean(data.pos_adv).toFixed(2))
+
+            $('#median_n_words').text(mean(data.n_words).toFixed(2))
+            $('#median_types').text(mean(data.types).toFixed(2))
+            $('#median_dil').text(mean(data.lexicalDiversity).toFixed(2))
+            $('#median_del').text(mean(data.lexicalDensity).toFixed(2))
+            $('#median_subs').text(mean(data.pos_subs).toFixed(2))
+            $('#median_verbs').text(mean(data.pos_verbs).toFixed(2))
+            $('#median_adj').text(mean(data.pos_adj).toFixed(2))
+            $('#median_adv').text(mean(data.pos_adv).toFixed(2))
+
+            $('#mode_n_words').text(mode(data.n_words)[0])
+            $('#mode_types').text(mode(data.types)[0])
+            $('#mode_dil').text(mode(data.lexicalDiversity)[0].toFixed(2))
+            $('#mode_del').text(mode(data.lexicalDensity)[0].toFixed(2))
+            $('#mode_subs').text(mode(data.pos_subs)[0])
+            $('#mode_verbs').text(mode(data.pos_verbs)[0])
+            $('#mode_adj').text(mode(data.pos_adj)[0])
+            $('#mode_adv').text(mode(data.pos_adv)[0])
+
+            $('#sd_n_words').text(sd(data.n_words).toFixed(2))
+            $('#sd_types').text(sd(data.types).toFixed(2))
+            $('#sd_dil').text(sd(data.lexicalDiversity).toFixed(2))
+            $('#sd_del').text(sd(data.lexicalDensity).toFixed(2))
+            $('#sd_subs').text(sd(data.pos_subs).toFixed(2))
+            $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2))
+            $('#sd_adj').text(sd(data.pos_adj).toFixed(2))
+            $('#sd_adv').text(sd(data.pos_adv).toFixed(2))
+
+            $('#lowest_n_words').text(lowest(data.n_words))
+            $('#lowest_types').text(lowest(data.types))
+            $('#lowest_dil').text(lowest(data.lexicalDiversity).toFixed(2))
+            $('#lowest_del').text(lowest(data.lexicalDensity).toFixed(2))
+            $('#lowest_subs').text(lowest(data.pos_subs))
+            $('#lowest_verbs').text(lowest(data.pos_verbs))
+            $('#lowest_adj').text(lowest(data.pos_adj))
+            $('#lowest_adv').text(lowest(data.pos_adv))
+
+            $('#highest_n_words').text(highest(data.n_words))
+            $('#highest_types').text(highest(data.types))
+            $('#highest_dil').text(highest(data.lexicalDiversity).toFixed(2))
+            $('#highest_del').text(highest(data.lexicalDensity).toFixed(2))
+            $('#highest_subs').text(highest(data.pos_subs))
+            $('#highest_verbs').text(highest(data.pos_verbs))
+            $('#highest_adj').text(highest(data.pos_adj))
+            $('#highest_adv').text(highest(data.pos_adv))
+
+
+            // Line Chart
             let datasets = [];
 
             if ($("#n_words_switch").is(':checked')) {
@@ -46,7 +104,7 @@ function get_stats() {
                     label: 'Número de Palavras',
                     data: data.n_words,
                     backgroundColor: 'rgb(255, 99, 132)',
-                    hoverOffset: 4
+                    borderColor: 'rgb(255, 99, 132)'
                 })
             } 
 
@@ -55,7 +113,7 @@ function get_stats() {
                     label: 'Vocabulário',
                     data: data.types,
                     backgroundColor: 'rgb(54, 162, 235)',
-                    hoverOffset: 4
+                    borderColor: 'rgb(54, 162, 235)'
                 })
             }
 
@@ -64,7 +122,7 @@ function get_stats() {
                     label: 'Diversidade Lexical',
                     data: data.lexicalDiversity,
                     backgroundColor: 'rgb(255, 205, 86)',
-                    hoverOffset: 4
+                    borderColor: 'rgb(255, 205, 86)'
                 })
             }
 
@@ -73,7 +131,7 @@ function get_stats() {
                     label: 'Densidade Lexical',
                     data: data.lexicalDensity,
                     backgroundColor: 'rgb(50, 205, 50)',
-                    hoverOffset: 4
+                    borderColor: 'rgb(50, 205, 50)'
                 })
             }
 
@@ -89,6 +147,12 @@ function get_stats() {
             const config = {
                 type: 'line',
                 data: data_chart,
+                options: {
+                    tension: 0.1,
+                    hoverOffset: 4,
+                    borderWidth: 4,
+                    pointHoverRadius: 10
+                }
             };
 
             if (general_line_chart == undefined) {
@@ -100,7 +164,51 @@ function get_stats() {
                 general_line_chart.data = data_chart;
                 general_line_chart.update();
             }
-            
+
+            // Pie Chart
+            var total_subs = data.pos_subs.reduce((a, b) => a + b, 0);
+            var total_verbs = data.pos_verbs.reduce((a, b) => a + b, 0);
+            var total_adj = data.pos_adj.reduce((a, b) => a + b, 0);
+            var total_adv = data.pos_adv.reduce((a, b) => a + b, 0);
+            var total_others = data.pos_others.reduce((a, b) => a + b, 0);
+
+            const data_pie = {
+                labels: [
+                  'Substantivos',
+                  'Verbos',
+                  'Adjetivos',
+                  'Advérbios',
+                  'Outros'
+                ],
+                datasets: [{
+                  label: 'Comparativo total de itens gramaticais',
+                  data: [total_subs, total_verbs, total_adj, total_adv, total_others],
+                  backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(50, 205, 50)',
+                    'rgb(125, 125, 125)'
+                  ],
+                  hoverOffset: 4
+                }]
+            };
+            const config_pie = {
+                type: 'pie',
+                data: data_pie,
+            };
+
+            if (pos_general_pie == undefined) {
+                pos_general_pie = new Chart(
+                    document.getElementById('general_pie_chart'),
+                    config_pie
+                );
+            } else {
+                pos_general_pie.data = data_pie;
+                pos_general_pie.update();
+            }
+
+            // Hide loading
             $(function() {
                 $("#loading").css("visibility", "hidden");
             });
@@ -207,7 +315,7 @@ function switch_production() {
                     'rgb(54, 162, 235)',
                     'rgb(255, 205, 86)',
                     'rgb(50, 205, 50)',
-                    'rgb(0, 0, 0)'
+                    'rgb(125, 125, 125)'
                   ],
                   hoverOffset: 4
                 }]
@@ -233,4 +341,100 @@ function switch_production() {
         }
     });
 
+}
+
+// UTILS
+//
+// Calculating the average/mean
+// https://www.sitepoint.com/community/t/calculating-the-average-mean/7302/3
+//
+ 
+/**
+ * The "mean" is the "average" you're used to, where you add up all the numbers
+ * and then divide by the number of numbers.
+ *
+ * For example, the "mean" of [3, 5, 4, 4, 1, 1, 2, 3] is 2.875.
+ *
+ * @param {Array} numbers An array of numbers.
+ * @return {Number} The calculated average (or mean) value from the specified
+ *     numbers.
+ */
+ function mean(numbers) {
+    var total = 0, i;
+    for (i = 0; i < numbers.length; i += 1) {
+        total += numbers[i];
+    }
+    return total / numbers.length;
+}
+ 
+
+/**
+ * The "median" is the "middle" value in the list of numbers.
+ *
+ * @param {Array} numbers An array of numbers.
+ * @return {Number} The calculated median value from the specified numbers.
+ */
+function median(numbers) {
+    // median of [3, 5, 4, 4, 1, 1, 2, 3] = 3
+    var median = 0, numsLen = numbers.length;
+    numbers.sort();
+ 
+    if (
+        numsLen % 2 === 0 // is even
+    ) {
+        // average of two middle numbers
+        median = (numbers[numsLen / 2 - 1] + numbers[numsLen / 2]) / 2;
+    } else { // is odd
+        // middle number only
+        median = numbers[(numsLen - 1) / 2];
+    }
+ 
+    return median;
+}
+ 
+/**
+ * The "mode" is the number that is repeated most often.
+ *
+ * For example, the "mode" of [3, 5, 4, 4, 1, 1, 2, 3] is [1, 3, 4].
+ *
+ * @param {Array} numbers An array of numbers.
+ * @return {Array} The mode of the specified numbers.
+ */
+function mode(numbers) {
+    // as result can be bimodal or multi-modal,
+    // the returned result is provided as an array
+    // mode of [3, 5, 4, 4, 1, 1, 2, 3] = [1, 3, 4]
+    var modes = [], count = [], i, number, maxIndex = 0;
+ 
+    for (i = 0; i < numbers.length; i += 1) {
+        number = numbers[i];
+        count[number] = (count[number] || 0) + 1;
+        if (count[number] > maxIndex) {
+            maxIndex = count[number];
+        }
+    }
+ 
+    for (i in count)
+        if (count.hasOwnProperty(i)) {
+            if (count[i] === maxIndex) {
+                modes.push(Number(i));
+            }
+        }
+ 
+    return modes;
+}
+
+function sd(numbers) {
+    //return index;
+    return 0;
+}
+
+function highest(numbers) {
+    //return index;
+    return 0;
+}
+
+function lowest(numbers) {
+    //return index;
+    return 0;
 }
