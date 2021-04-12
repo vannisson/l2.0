@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style/app.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{{ url_for('static',filename='js/app.js') }}"></script>
+        <script src="https://kit.fontawesome.com/10ebf3e3af.js" crossorigin="anonymous"></script>
+        <title>Lexicanalytics Web | Análise textual e estatística</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/favicon.png') }}"/>
+    </head>
+    <body onload="get_stats();switch_production();">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-2">
+                    <img src="{{ url_for('static',filename='img/logo.svg') }}" id="logo" />
+                </div>
+                <div class="col-5">
+                    <h1>Lexicanalytics Web</h1>
+                    <h3>Análise textual e estatística</h3>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center">Resultados</h2>
+
+        <div class="container" id="all_prod_results">
+            <h3 class="text-center">Todas produções:</h3>
+
+            <div class="col-8">
+                <canvas id="general_chart" width="300" height="300"></canvas>
+            </div>
+
+            <div class="col-4">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="n_words_switch" onclick="get_stats();" checked>
+                    <label class="form-check-label" for="n_words_switch">Número de Palavras</label>
+                </div>
+                
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="types_switch" onclick="get_stats();">
+                    <label class="form-check-label" for="types_switch">Vocabulário</label>
+                </div>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="dil_switch" onclick="get_stats();">
+                    <label class="form-check-label" for="dil_switch">Diversidade Lexical</label>
+                </div>
+                
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="del_switch" onclick="get_stats();">
+                    <label class="form-check-label" for="del_switch">Densidade Lexical</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container" id="loading">
+            <div class="d-flex justify-content-center mt-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container" id="results">
+            <h3 class="text-center">Resultados por produção</h3>
+
+            <select id='production' onchange="switch_production();" class="form-select" aria-label="Default select example">
+                {% for i in range(num_prod) %}
+                <option value="{{i}}">P{{ i + 1}}</option>
+                {% endfor %}
+
+            </select>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">Texto</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="false">Sumário</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pos_tagging-tab" data-bs-toggle="tab" data-bs-target="#pos_tagging" type="button" role="tab" aria-controls="pos_tagging" aria-selected="false">Morfologia</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Detalhes</button>
+                </li>
+            </ul>
+
+            
+            <div class="tab-content" id="myTabContent">
+
+                <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+                    <textarea type="text" readonly id="text_box" class="form-control" style="height: 25vw"></textarea>
+                </div>
+
+                <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class="mb-3 row">
+                        <label for="n_words" class="col-sm-2 col-form-label">Número de Palavras</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="types" class="col-sm-2 col-form-label">Vocabulário</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="types" value="0.0">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <label for="dil" class="col-sm-2 col-form-label">Diversidade Lexical</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="dil" value="0.0">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="del" class="col-sm-2 col-form-label">Densidade Lexical</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="del" value="0.0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pos_tagging" role="tabpanel" aria-labelledby="pos_tagging-tab">
+                    <div class="col-5">
+                        <div class="mb-3 row">
+                            <label for="n_words" class="col-sm-2 col-form-label">Substantivos</label>
+                            <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="types" class="col-sm-2 col-form-label">Verbos</label>
+                            <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label for="dil" class="col-sm-2 col-form-label">Adjetivos</label>
+                            <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="del" class="col-sm-2 col-form-label">Advérbios</label>
+                            <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
+                            </div>
+                        </div>                
+
+                        <div class="mb-3 row">
+                            <label for="n_lines" class="col-sm-2 col-form-label">Outros</label>
+                            <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-7">
+                        <canvas id="pos_prod_chart" width="200" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <div id="POS"></div>
+
+                    <table class="table table-hover" id="details_table">
+                        <thead class="thead-primary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Palavra</th>
+                            <th scope="col">Classificação</th>
+                            <th scope="col">Frequência</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    
+    </body>
+</html>
