@@ -2,8 +2,8 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
-url_ip = 'localhost'
-//url_ip = '192.168.1.7'
+//url_ip = 'localhost'
+url_ip = '192.168.1.7'
 
 function analyze(){
     // Makes results div visible
@@ -193,24 +193,23 @@ function get_stats() {
             var total_adv = data.pos_adv.reduce((a, b) => a + b, 0);
             var total_others = data.pos_others.reduce((a, b) => a + b, 0);
 
+            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios'];
+            general_pos_data = [total_subs, total_verbs, total_adj, total_adv];
+            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)'];
+
+            if ($("#lexitems_switch").is(':checked') == false) {
+                general_pos_labels.push('Outros');
+                general_pos_data.push(total_others);
+                general_pos_backgroudColor.push('rgb(125, 125, 125)')
+            } 
+            
+            
             const data_pie = {
-                labels: [
-                  'Substantivos',
-                  'Verbos',
-                  'Adjetivos',
-                  'Advérbios',
-                  'Outros'
-                ],
+                labels: general_pos_labels,
                 datasets: [{
                   label: 'Comparativo total de itens gramaticais',
-                  data: [total_subs, total_verbs, total_adj, total_adv, total_others],
-                  backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(50, 205, 50)',
-                    'rgb(125, 125, 125)'
-                  ],
+                  data: general_pos_data,
+                  backgroundColor: general_pos_backgroudColor,
                   hoverOffset: 4
                 }]
             };
