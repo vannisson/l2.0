@@ -41,59 +41,77 @@ function get_stats() {
         success: function(data) {            
 
             // General statistics info
-            $('#mean_n_words').text(mean(data.n_words).toFixed(2))
-            $('#mean_types').text(mean(data.types).toFixed(2))
-            $('#mean_dil').text(mean(data.lexicalDiversity).toFixed(2))
-            $('#mean_del').text(mean(data.lexicalDensity).toFixed(2))
-            $('#mean_subs').text(mean(data.pos_subs).toFixed(2))
-            $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2))
-            $('#mean_adj').text(mean(data.pos_adj).toFixed(2))
-            $('#mean_adv').text(mean(data.pos_adv).toFixed(2))
+            $('#mean_n_words').text(mean(data.n_words).toFixed(2));
+            $('#mean_types').text(mean(data.types).toFixed(2));
+            $('#mean_dil').text(mean(data.lexicalDiversity).toFixed(2));
+            $('#mean_del').text(mean(data.lexicalDensity).toFixed(2));
+            $('#mean_subs').text(mean(data.pos_subs).toFixed(2));
+            $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2));
+            $('#mean_adj').text(mean(data.pos_adj).toFixed(2));
+            $('#mean_adv').text(mean(data.pos_adv).toFixed(2));
 
-            $('#median_n_words').text(mean(data.n_words).toFixed(2))
-            $('#median_types').text(mean(data.types).toFixed(2))
-            $('#median_dil').text(mean(data.lexicalDiversity).toFixed(2))
-            $('#median_del').text(mean(data.lexicalDensity).toFixed(2))
-            $('#median_subs').text(mean(data.pos_subs).toFixed(2))
-            $('#median_verbs').text(mean(data.pos_verbs).toFixed(2))
-            $('#median_adj').text(mean(data.pos_adj).toFixed(2))
-            $('#median_adv').text(mean(data.pos_adv).toFixed(2))
+            $('#median_n_words').text(mean(data.n_words).toFixed(2));
+            $('#median_types').text(mean(data.types).toFixed(2));
+            $('#median_dil').text(mean(data.lexicalDiversity).toFixed(2));
+            $('#median_del').text(mean(data.lexicalDensity).toFixed(2));
+            $('#median_subs').text(mean(data.pos_subs).toFixed(2));
+            $('#median_verbs').text(mean(data.pos_verbs).toFixed(2));
+            $('#median_adj').text(mean(data.pos_adj).toFixed(2));
+            $('#median_adv').text(mean(data.pos_adv).toFixed(2));
 
-            $('#mode_n_words').text(mode(data.n_words)[0])
-            $('#mode_types').text(mode(data.types)[0])
-            $('#mode_dil').text(mode(data.lexicalDiversity)[0].toFixed(2))
-            $('#mode_del').text(mode(data.lexicalDensity)[0].toFixed(2))
-            $('#mode_subs').text(mode(data.pos_subs)[0])
-            $('#mode_verbs').text(mode(data.pos_verbs)[0])
-            $('#mode_adj').text(mode(data.pos_adj)[0])
-            $('#mode_adv').text(mode(data.pos_adv)[0])
+            $('#mode_n_words').text(mode(data.n_words)[0]);
+            $('#mode_types').text(mode(data.types)[0]);
+            $('#mode_dil').text(mode(data.lexicalDiversity)[0].toFixed(2));
+            $('#mode_del').text(mode(data.lexicalDensity)[0].toFixed(2));
+            $('#mode_subs').text(mode(data.pos_subs)[0]);
+            $('#mode_verbs').text(mode(data.pos_verbs)[0]);
+            $('#mode_adj').text(mode(data.pos_adj)[0]);
+            $('#mode_adv').text(mode(data.pos_adv)[0]);
 
-            $('#sd_n_words').text(sd(data.n_words).toFixed(2))
-            $('#sd_types').text(sd(data.types).toFixed(2))
-            $('#sd_dil').text(sd(data.lexicalDiversity).toFixed(2))
-            $('#sd_del').text(sd(data.lexicalDensity).toFixed(2))
-            $('#sd_subs').text(sd(data.pos_subs).toFixed(2))
-            $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2))
-            $('#sd_adj').text(sd(data.pos_adj).toFixed(2))
-            $('#sd_adv').text(sd(data.pos_adv).toFixed(2))
+            $('#sd_n_words').text(sd(data.n_words).toFixed(2));
+            $('#sd_types').text(sd(data.types).toFixed(2));
+            $('#sd_dil').text(sd(data.lexicalDiversity).toFixed(2));
+            $('#sd_del').text(sd(data.lexicalDensity).toFixed(2));
+            $('#sd_subs').text(sd(data.pos_subs).toFixed(2));
+            $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2));
+            $('#sd_adj').text(sd(data.pos_adj).toFixed(2));
+            $('#sd_adv').text(sd(data.pos_adv).toFixed(2));
 
-            $('#lowest_n_words').text(lowest(data.n_words))
-            $('#lowest_types').text(lowest(data.types))
-            $('#lowest_dil').text(lowest(data.lexicalDiversity).toFixed(2))
-            $('#lowest_del').text(lowest(data.lexicalDensity).toFixed(2))
-            $('#lowest_subs').text(lowest(data.pos_subs))
-            $('#lowest_verbs').text(lowest(data.pos_verbs))
-            $('#lowest_adj').text(lowest(data.pos_adj))
-            $('#lowest_adv').text(lowest(data.pos_adv))
+            var lowest_idx = 0;
+            lowest_idx = lowest(data.n_words);
+            $('#lowest_n_words').text(data.n_words[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.types);
+            $('#lowest_types').text(data.types[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.lexicalDiversity);
+            $('#lowest_dil').text(data.lexicalDiversity[lowest_idx].toFixed(2) + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.lexicalDensity);
+            $('#lowest_del').text(data.lexicalDensity[lowest_idx].toFixed(2) + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_subs);
+            $('#lowest_subs').text(data.pos_subs[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_verbs);
+            $('#lowest_verbs').text(data.pos_verbs[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_adj);
+            $('#lowest_adj').text(data.pos_adj[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_adv);
+            $('#lowest_adv').text(data.pos_adv[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
 
-            $('#highest_n_words').text(highest(data.n_words))
-            $('#highest_types').text(highest(data.types))
-            $('#highest_dil').text(highest(data.lexicalDiversity).toFixed(2))
-            $('#highest_del').text(highest(data.lexicalDensity).toFixed(2))
-            $('#highest_subs').text(highest(data.pos_subs))
-            $('#highest_verbs').text(highest(data.pos_verbs))
-            $('#highest_adj').text(highest(data.pos_adj))
-            $('#highest_adv').text(highest(data.pos_adv))
+            var highest_idx = 0;
+            highest_idx = lowest(data.n_words);
+            $('#highest_n_words').text(data.n_words[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.types);
+            $('#highest_types').text(data.types[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.lexicalDiversity);
+            $('#highest_dil').text(data.lexicalDiversity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.lexicalDensity);
+            $('#highest_del').text(data.lexicalDensity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.pos_subs);
+            $('#highest_subs').text(data.pos_subs[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.pos_verbs);
+            $('#highest_verbs').text(data.pos_verbs[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.pos_adj);
+            $('#highest_adj').text(data.pos_adj[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = lowest(data.pos_adv);
+            $('#highest_adv').text(data.pos_adv[highest_idx] + ' (T' + (highest_idx+1) + ')');
 
 
             // Line Chart
@@ -431,10 +449,10 @@ function sd(numbers) {
 
 function highest(numbers) {
     //return index;
-    return 0;
+    return [].reduce.call(numbers, (m, c, i, arr) => c > arr[m] ? i : m, 0);
 }
 
 function lowest(numbers) {
     //return index;
-    return 0;
+    return [].reduce.call(numbers, (m, c, i, arr) => c < arr[m] ? i : m, 0);
 }

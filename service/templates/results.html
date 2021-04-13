@@ -29,7 +29,7 @@
         <h2 class="text-center">Resultados</h2>
 
         <div class="container" id="all_prod_results">
-            <h3 class="text-center">Todas produções:</h3>
+            <h3 class="text-center">Todos textos:</h3>
 
             <div class="d-flex align-items-start">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -95,12 +95,13 @@
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-pos" role="tabpanel" aria-labelledby="v-pills-pos-tab">
-                        <canvas id="general_pie_chart" width="300" height="300"></canvas>
+                        <div class="col-8">
+                            <canvas id="general_pie_chart" width="300" height="300"></canvas>
+                        </div> 
                     </div>
                 </div>
             </div>
               
-            
 
         </div>
 
@@ -113,11 +114,11 @@
         </div>
         
         <div class="container" id="results">
-            <h3 class="text-center">Resultados por produção</h3>
+            <h3 class="text-center">Resultados por texto</h3>
 
             <select id='production' onchange="switch_production();" class="form-select" aria-label="Default select example">
                 {% for i in range(num_prod) %}
-                <option value="{{i}}">P{{ i + 1}}</option>
+                <option value="{{i}}">T{{ i + 1}}</option>
                 {% endfor %}
 
             </select>
