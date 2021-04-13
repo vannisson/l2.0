@@ -38,7 +38,7 @@ function get_stats() {
     });
     $.getJSON({
         url: 'http://127.0.0.1:5000/stats/',
-        success: function(data) {            
+        success: function(data) {
 
             // General statistics info
             $('#mean_n_words').text(mean(data.n_words).toFixed(2));
@@ -96,21 +96,21 @@ function get_stats() {
             $('#lowest_adv').text(data.pos_adv[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
 
             var highest_idx = 0;
-            highest_idx = lowest(data.n_words);
+            highest_idx = highest(data.n_words);
             $('#highest_n_words').text(data.n_words[highest_idx] + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.types);
+            highest_idx = highest(data.types);
             $('#highest_types').text(data.types[highest_idx] + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.lexicalDiversity);
+            highest_idx = highest(data.lexicalDiversity);
             $('#highest_dil').text(data.lexicalDiversity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.lexicalDensity);
+            highest_idx = highest(data.lexicalDensity);
             $('#highest_del').text(data.lexicalDensity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.pos_subs);
+            highest_idx = highest(data.pos_subs);
             $('#highest_subs').text(data.pos_subs[highest_idx] + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.pos_verbs);
+            highest_idx = highest(data.pos_verbs);
             $('#highest_verbs').text(data.pos_verbs[highest_idx] + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.pos_adj);
+            highest_idx = highest(data.pos_adj);
             $('#highest_adj').text(data.pos_adj[highest_idx] + ' (T' + (highest_idx+1) + ')');
-            highest_idx = lowest(data.pos_adv);
+            highest_idx = highest(data.pos_adv);
             $('#highest_adv').text(data.pos_adv[highest_idx] + ' (T' + (highest_idx+1) + ')');
 
 
@@ -444,7 +444,12 @@ function mode(numbers) {
 
 function sd(numbers) {
     //return index;
-    return 0;
+    avg = mean(numbers);
+    result = [].reduce.call(numbers, (m, c) => m + Math.pow(c - avg, 2), 0);
+    result = result/numbers.length;
+    result = Math.sqrt(result);
+
+    return result;
 }
 
 function highest(numbers) {
