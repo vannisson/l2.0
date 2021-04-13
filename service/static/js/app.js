@@ -2,8 +2,8 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
-//url_ip = 'localhost'
-url_ip = '192.168.1.7'
+url_ip = 'localhost'
+//url_ip = '192.168.1.7'
 
 function analyze(){
     // Makes results div visible
@@ -32,6 +32,17 @@ function analyze(){
         }
     });
     
+}
+
+function initResults() {
+
+    pos_prod_pie = new Chart($('#pos_prod_chart')[0], {type: 'pie'});
+    general_line_chart = new Chart($('#general_chart')[0], {type: 'line', options: {tension: 0.1, hoverOffset: 4, borderWidth: 4, pointHoverRadius: 10}});
+    pos_general_pie = new Chart($('#general_pie_chart')[0], {type: 'pie'});
+
+    get_stats();
+    
+    switch_production();
 }
 
 function get_stats() {
@@ -165,26 +176,9 @@ function get_stats() {
                 labels: labels,
                 datasets: datasets
             };
-            const config = {
-                type: 'line',
-                data: data_chart,
-                options: {
-                    tension: 0.1,
-                    hoverOffset: 4,
-                    borderWidth: 4,
-                    pointHoverRadius: 10
-                }
-            };
 
-            if (general_line_chart == undefined) {
-                general_line_chart = new Chart(
-                    document.getElementById('general_chart'),
-                    config
-                );
-            } else {
-                general_line_chart.data = data_chart;
-                general_line_chart.update();
-            }
+            general_line_chart.data = data_chart;
+            general_line_chart.update();
 
             // Pie Chart
             var total_subs = data.pos_subs.reduce((a, b) => a + b, 0);
@@ -203,7 +197,6 @@ function get_stats() {
                 general_pos_backgroudColor.push('rgb(125, 125, 125)')
             } 
             
-            
             const data_pie = {
                 labels: general_pos_labels,
                 datasets: [{
@@ -213,20 +206,8 @@ function get_stats() {
                   hoverOffset: 4
                 }]
             };
-            const config_pie = {
-                type: 'pie',
-                data: data_pie,
-            };
-
-            if (pos_general_pie == undefined) {
-                pos_general_pie = new Chart(
-                    document.getElementById('general_pie_chart'),
-                    config_pie
-                );
-            } else {
-                pos_general_pie.data = data_pie;
-                pos_general_pie.update();
-            }
+            pos_general_pie.data = data_pie;
+            pos_general_pie.update();
 
             document.getElementById("total_subs_count").value = total_subs;
             document.getElementById("total_verbs_count").value = total_verbs;
@@ -346,20 +327,9 @@ function switch_production() {
                   hoverOffset: 4
                 }]
             };
-            const config = {
-                type: 'pie',
-                data: data_chart,
-            };
-
-            if (pos_prod_pie == undefined) {
-                pos_prod_pie = new Chart(
-                    document.getElementById('pos_prod_chart'),
-                    config
-                );
-            } else {
-                pos_prod_pie.data = data_chart;
-                pos_prod_pie.update();
-            }
+            
+            pos_prod_pie.data = data_chart;
+            pos_prod_pie.update();
             
             $(function() {
                 $("#loading").css("visibility", "hidden");
