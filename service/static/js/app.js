@@ -2,6 +2,9 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
+//url_ip = '127.0.0.1'
+url_ip = '192.168.1.7'
+
 function analyze(){
     // Makes results div visible
     $(function() {
@@ -9,7 +12,7 @@ function analyze(){
     });
     var txt = $("#text_box").val();
     $.ajax({
-        url: 'http://127.0.0.1:5000/analyze/',
+        url: 'http://' + url_ip + ':5000/analyze/',
         contentType: 'application/json',
         cache: false,
         method: 'POST',
@@ -37,7 +40,7 @@ function get_stats() {
         $("#loading").css("visibility", "visible");
     });
     $.getJSON({
-        url: 'http://127.0.0.1:5000/stats/',
+        url: 'http://' + url_ip + ':5000/stats/',
         success: function(data) {
 
             // General statistics info
@@ -226,6 +229,12 @@ function get_stats() {
                 pos_general_pie.update();
             }
 
+            document.getElementById("total_subs_count").value = total_subs;
+            document.getElementById("total_verbs_count").value = total_verbs;
+            document.getElementById("total_adj_count").value = total_adj;
+            document.getElementById("total_adv_count").value = total_adv;
+            document.getElementById("total_others_count").value = total_others;
+
             // Hide loading
             $(function() {
                 $("#loading").css("visibility", "hidden");
@@ -241,7 +250,7 @@ function switch_production() {
     });
 
     $.ajax({
-        url: 'http://127.0.0.1:5000/prod_info/',
+        url: 'http://' + url_ip + ':5000/prod_info/',
         contentType: 'application/json',
         cache: false,
         method: 'POST',

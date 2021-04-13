@@ -16,10 +16,10 @@
     <body onload="get_stats();switch_production();">
         <div class="container">
             <div class="row justify-content-md-center">
-                <div class="col-2">
+                <div class="col-md-2">
                     <img src="{{ url_for('static',filename='img/logo.svg') }}" id="logo" />
                 </div>
-                <div class="col-5">
+                <div class="col-md-5">
                     <h1>Lexicanalytics Web</h1>
                     <h3>Análise textual e estatística</h3>
                 </div>
@@ -66,11 +66,11 @@
 
                     <div class="tab-pane fade" id="v-pills-charts" role="tabpanel" aria-labelledby="v-pills-charts-tab">
                         <div class="row">
-                            <div class="col-8">
-                                <canvas id="general_chart" width="300" height="300"></canvas>
+                            <div class="col-md-8">
+                                <canvas id="general_chart" width="300" height="300" class="chart"></canvas>
                             </div>
             
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="n_words_switch" onclick="get_stats();" checked>
                                     <label class="form-check-label" for="n_words_switch">Número de Palavras</label>
@@ -95,9 +95,49 @@
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-pos" role="tabpanel" aria-labelledby="v-pills-pos-tab">
-                        <div class="col-8">
-                            <canvas id="general_pie_chart" width="300" height="300"></canvas>
-                        </div> 
+                        <div class="row">
+                            <div class="col-7">
+                                <canvas id="general_pie_chart" width="300" height="300" class="chart"></canvas>
+                            </div>
+
+                            <div class="col-5">
+                                <div class="row">
+                                    <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="total_subs_count" value="0.0">
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="total_verbs_count" value="0.0">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="total_adj_count" value="0.0">
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="total_adv_count" value="0.0">
+                                    </div>
+                                </div>                
+    
+                                <div class="row">
+                                    <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="total_others_count" value="0.0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -149,28 +189,28 @@
                     <div class="mb-3 row">
                         <label for="n_words" class="col-sm-2 col-form-label">Número de Palavras</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <label for="types" class="col-sm-2 col-form-label">Vocabulário</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="types" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="types" value="0.0">
                         </div>
                     </div>
                     
                     <div class="mb-3 row">
                         <label for="dil" class="col-sm-2 col-form-label">Diversidade Lexical</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="dil" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="dil" value="0.0">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <label for="del" class="col-sm-2 col-form-label">Densidade Lexical</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="del" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="del" value="0.0">
                         </div>
                     </div>
                 </div>
@@ -178,38 +218,38 @@
                 <div class="tab-pane fade" id="pos_tagging" role="tabpanel" aria-labelledby="pos_tagging-tab">
                     <div class="row">
                         <div class="col-5">
-                            <div class="mb-3 row">
-                                <label for="n_words" class="col-sm-2 col-form-label">Substantivos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
+                            <div class="row">
+                                <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label for="types" class="col-sm-2 col-form-label">Verbos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
+                            <div class="row">
+                                <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
                                 </div>
                             </div>
                             
-                            <div class="mb-3 row">
-                                <label for="dil" class="col-sm-2 col-form-label">Adjetivos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
+                            <div class="row">
+                                <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label for="del" class="col-sm-2 col-form-label">Advérbios</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
+                            <div class="row">
+                                <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
                                 </div>
                             </div>                
 
-                            <div class="mb-3 row">
-                                <label for="n_lines" class="col-sm-2 col-form-label">Outros</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
+                            <div class="row">
+                                <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
                                 </div>
                             </div>
                         </div>
