@@ -24,11 +24,11 @@ app = Flask(__name__)
 csv_filepath = 'productions.csv'
 
 # Session config
-source_path = Path(Path(os.getcwd()))
-app.config['UPLOAD_FOLDER'] = os.path.join(str(source_path), 'Uploads')
-SESSION_TYPE = 'filesystem'
-app.config.from_object(__name__)
-Session(app)
+#source_path = Path(Path(os.getcwd()))
+#app.config['UPLOAD_FOLDER'] = os.path.join(str(source_path), 'Uploads')
+#SESSION_TYPE = 'filesystem'
+#app.config.from_object(__name__)
+#Session(app)
 
 # API Config
 api = Api(app = app, 

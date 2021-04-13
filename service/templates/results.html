@@ -13,13 +13,13 @@
         <title>Lexicanalytics Web | Análise textual e estatística</title>
         <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/favicon.png') }}"/>
     </head>
-    <body onload="get_stats();switch_production();">
+    <body onload="initResults();">
         <div class="container">
             <div class="row justify-content-md-center">
-                <div class="col-2">
+                <div class="col-md-2">
                     <img src="{{ url_for('static',filename='img/logo.svg') }}" id="logo" />
                 </div>
-                <div class="col-5">
+                <div class="col-md-5">
                     <h1>Lexicanalytics Web</h1>
                     <h3>Análise textual e estatística</h3>
                 </div>
@@ -29,78 +29,128 @@
         <h2 class="text-center">Resultados</h2>
 
         <div class="container" id="all_prod_results">
-            <h3 class="text-center">Todas produções:</h3>
-
-            <div class="d-flex align-items-start">
-                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active" id="v-pills-general-tab" data-bs-toggle="pill" data-bs-target="#v-pills-general" type="button" role="tab" aria-controls="v-general-home" aria-selected="true">Geral</button>
-                    <button class="nav-link" id="v-pills-charts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-charts" type="button" role="tab" aria-controls="v-pills-charts" aria-selected="false">Gráficos</button>
-                    <button class="nav-link" id="v-pills-pos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-pos" type="button" role="tab" aria-controls="v-pills-pos" aria-selected="false">Morfologia</button>
+            <h3 class="text-center">Todos textos:</h3>
+            
+            <ul class="nav nav-pills" id="generalTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general" type="button" role="tab" aria-controls="general" aria-selected="true">Geral</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-charts-tab" data-bs-toggle="pill" data-bs-target="#pills-charts" type="button" role="tab" aria-controls="charts" aria-selected="false">Gráficos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-pos-tab" data-bs-toggle="pill" data-bs-target="#pills-pos" type="button" role="tab" aria-controls="pills-pos" aria-selected="false">Morfologia</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+                    <table class="table table-hover" id="general_table">
+                        <thead class="thead-primary">
+                        <tr>
+                            <th scope="col">Métrica</th>
+                            <th scope="col">Média</th>
+                            <th scope="col">Mediana</th>
+                            <th scope="col">Moda</th>
+                            <th scope="col">Desvio Padrão</th>
+                            <th scope="col">Menor</th>
+                            <th scope="col">Maior</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Número de Palavras</th><td id="mean_n_words"></td><td id="median_n_words"></td><td id="mode_n_words"></td><td id="sd_n_words"></td><td id="lowest_n_words"></td><td id="highest_n_words"></td></tr>
+                            <tr><th scope="row">Vocabulário</th><td id="mean_types"></td><td id="median_types"></td><td id="mode_types"></td><td id="sd_types"></td><td id="lowest_types"></td><td id="highest_types"></td></tr>
+                            <tr><th scope="row">Diversidade Lexical</th><td id="mean_dil"></td><td id="median_dil"><td id="mode_dil"></td><td id="sd_dil"></td><td id="lowest_dil"></td><td id="highest_dil"></td></tr>
+                            <tr><th scope="row">Densidade Lexical</th><td id="mean_del"></td><td id="median_del"><td id="mode_del"></td><td id="sd_del"></td><td id="lowest_del"></td><td id="highest_del"></td></tr>
+                            <tr><th scope="row">Substantivos</th><td id="mean_subs"></td><td id="median_subs"><td id="mode_subs"></td><td id="sd_subs"></td><td id="lowest_subs"></td><td id="highest_subs"></td></tr>
+                            <tr><th scope="row">Verbos</th><td id="mean_verbs"></td><td id="median_verbs"><td id="mode_verbs"></td><td id="sd_verbs"></td><td id="lowest_verbs"></td><td id="highest_verbs"></td></tr>
+                            <tr><th scope="row">Adjetivos</th><td id="mean_adj"></td><td id="median_adj"><td id="mode_adj"></td><td id="sd_adj"><td id="lowest_adj"></td><td id="highest_adj"></td></tr>
+                            <tr><th scope="row">Advérbios</th><td id="mean_adv"></td><td id="median_adv"><td id="mode_adv"></td><td id="sd_adv"></td><td id="lowest_adv"></td><td id="highest_adv"></td></tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel" aria-labelledby="v-pills-general-tab">
-                        <table class="table table-hover" id="general_table">
-                            <thead class="thead-primary">
-                            <tr>
-                                <th scope="col">Métrica</th>
-                                <th scope="col">Média</th>
-                                <th scope="col">Mediana</th>
-                                <th scope="col">Moda</th>
-                                <th scope="col">Desvio Padrão</th>
-                                <th scope="col">Menor</th>
-                                <th scope="col">Maior</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr><th scope="row">Número de Palavras</th><td id="mean_n_words"></td><td id="median_n_words"></td><td id="mode_n_words"></td><td id="sd_n_words"></td><td id="lowest_n_words"></td><td id="highest_n_words"></td></tr>
-                                <tr><th scope="row">Vocabulário</th><td id="mean_types"></td><td id="median_types"></td><td id="mode_types"></td><td id="sd_types"></td><td id="lowest_types"></td><td id="highest_types"></td></tr>
-                                <tr><th scope="row">Diversidade Lexical</th><td id="mean_dil"></td><td id="median_dil"><td id="mode_dil"></td><td id="sd_dil"></td><td id="lowest_dil"></td><td id="highest_dil"></td></tr>
-                                <tr><th scope="row">Densidade Lexical</th><td id="mean_del"></td><td id="median_del"><td id="mode_del"></td><td id="sd_del"></td><td id="lowest_del"></td><td id="highest_del"></td></tr>
-                                <tr><th scope="row">Substantivos</th><td id="mean_subs"></td><td id="median_subs"><td id="mode_subs"></td><td id="sd_subs"></td><td id="lowest_subs"></td><td id="highest_subs"></td></tr>
-                                <tr><th scope="row">Verbos</th><td id="mean_verbs"></td><td id="median_verbs"><td id="mode_verbs"></td><td id="sd_verbs"></td><td id="lowest_verbs"></td><td id="highest_verbs"></td></tr>
-                                <tr><th scope="row">Adjetivos</th><td id="mean_adj"></td><td id="median_adj"><td id="mode_adj"></td><td id="sd_adj"><td id="lowest_adj"></td><td id="highest_adj"></td></tr>
-                                <tr><th scope="row">Advérbios</th><td id="mean_adv"></td><td id="median_adv"><td id="mode_adv"></td><td id="sd_adv"></td><td id="lowest_adv"></td><td id="highest_adv"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <div class="tab-pane fade" id="v-pills-charts" role="tabpanel" aria-labelledby="v-pills-charts-tab">
-                        <div class="row">
-                            <div class="col-8">
-                                <canvas id="general_chart" width="300" height="300"></canvas>
+                <div class="tab-pane fade" id="pills-charts" role="tabpanel" aria-labelledby="pills-charts-tab">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <canvas id="general_chart" class="chart"></canvas>
+                        </div>
+        
+                        <div class="col-md-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="n_words_switch" onclick="get_stats();" checked>
+                                <label class="form-check-label" for="n_words_switch">Número de Palavras</label>
                             </div>
-            
-                            <div class="col-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="n_words_switch" onclick="get_stats();" checked>
-                                    <label class="form-check-label" for="n_words_switch">Número de Palavras</label>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="types_switch" onclick="get_stats();">
+                                <label class="form-check-label" for="types_switch">Vocabulário</label>
+                            </div>
+        
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="dil_switch" onclick="get_stats();">
+                                <label class="form-check-label" for="dil_switch">Diversidade Lexical</label>
+                            </div>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="del_switch" onclick="get_stats();">
+                                <label class="form-check-label" for="del_switch">Densidade Lexical</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-pos" role="tabpanel" aria-labelledby="pills-pos-tab">
+                    <div class="row">
+                        <div class="col-7">
+                            <canvas id="general_pie_chart" class="chart"></canvas>
+                        </div>
+
+                        <div class="col-5">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="lexitems_switch" onclick="get_stats();">
+                                <label class="form-check-label" for="lexitems_switch">Apenas Itens Lexicais</label>
+                            </div>
+
+                            <div class="row">
+                                <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_subs_count" value="0.0">
                                 </div>
-                                
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="types_switch" onclick="get_stats();">
-                                    <label class="form-check-label" for="types_switch">Vocabulário</label>
+                            </div>
+
+                            <div class="row">
+                                <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_verbs_count" value="0.0">
                                 </div>
-            
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="dil_switch" onclick="get_stats();">
-                                    <label class="form-check-label" for="dil_switch">Diversidade Lexical</label>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_adj_count" value="0.0">
                                 </div>
-                                
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="del_switch" onclick="get_stats();">
-                                    <label class="form-check-label" for="del_switch">Densidade Lexical</label>
+                            </div>
+
+                            <div class="row">
+                                <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_adv_count" value="0.0">
+                                </div>
+                            </div>                
+
+                            <div class="row">
+                                <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_others_count" value="0.0">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-pos" role="tabpanel" aria-labelledby="v-pills-pos-tab">
-                        <canvas id="general_pie_chart" width="300" height="300"></canvas>
-                    </div>
                 </div>
             </div>
               
-            
 
         </div>
 
@@ -113,16 +163,16 @@
         </div>
         
         <div class="container" id="results">
-            <h3 class="text-center">Resultados por produção</h3>
+            <h3 class="text-center">Resultados por texto</h3>
 
             <select id='production' onchange="switch_production();" class="form-select" aria-label="Default select example">
                 {% for i in range(num_prod) %}
-                <option value="{{i}}">P{{ i + 1}}</option>
+                <option value="{{i}}">T{{ i + 1}}</option>
                 {% endfor %}
 
             </select>
 
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">Texto</button>
                 </li>
@@ -148,28 +198,28 @@
                     <div class="mb-3 row">
                         <label for="n_words" class="col-sm-2 col-form-label">Número de Palavras</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <label for="types" class="col-sm-2 col-form-label">Vocabulário</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="types" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="types" value="0.0">
                         </div>
                     </div>
                     
                     <div class="mb-3 row">
                         <label for="dil" class="col-sm-2 col-form-label">Diversidade Lexical</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="dil" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="dil" value="0.0">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <label for="del" class="col-sm-2 col-form-label">Densidade Lexical</label>
                         <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="del" value="0.0">
+                            <input type="text" readonly class="form-control-plaintext" id="del" value="0.0">
                         </div>
                     </div>
                 </div>
@@ -177,44 +227,44 @@
                 <div class="tab-pane fade" id="pos_tagging" role="tabpanel" aria-labelledby="pos_tagging-tab">
                     <div class="row">
                         <div class="col-5">
-                            <div class="mb-3 row">
-                                <label for="n_words" class="col-sm-2 col-form-label">Substantivos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
+                            <div class="row">
+                                <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label for="types" class="col-sm-2 col-form-label">Verbos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
+                            <div class="row">
+                                <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
                                 </div>
                             </div>
                             
-                            <div class="mb-3 row">
-                                <label for="dil" class="col-sm-2 col-form-label">Adjetivos</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
+                            <div class="row">
+                                <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label for="del" class="col-sm-2 col-form-label">Advérbios</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
+                            <div class="row">
+                                <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
                                 </div>
                             </div>                
 
-                            <div class="mb-3 row">
-                                <label for="n_lines" class="col-sm-2 col-form-label">Outros</label>
-                                <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
+                            <div class="row">
+                                <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-7">
-                            <canvas id="pos_prod_chart" width="200" height="200"></canvas>
+                            <canvas id="pos_prod_chart"></canvas>
                         </div>
                     </div>
                 </div>

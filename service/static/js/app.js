@@ -2,6 +2,9 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
+url_ip = 'localhost'
+//url_ip = '192.168.1.7'
+
 function analyze(){
     // Makes results div visible
     $(function() {
@@ -9,7 +12,7 @@ function analyze(){
     });
     var txt = $("#text_box").val();
     $.ajax({
-        url: 'http://127.0.0.1:5000/analyze/',
+        url: 'http://' + url_ip + ':5000/analyze/',
         contentType: 'application/json',
         cache: false,
         method: 'POST',
@@ -31,69 +34,98 @@ function analyze(){
     
 }
 
+function initResults() {
+
+    pos_prod_pie = new Chart($('#pos_prod_chart')[0], {type: 'pie'});
+    general_line_chart = new Chart($('#general_chart')[0], {type: 'line', options: {tension: 0.1, hoverOffset: 4, borderWidth: 4, pointHoverRadius: 10}});
+    pos_general_pie = new Chart($('#general_pie_chart')[0], {type: 'pie'});
+
+    get_stats();
+    
+    switch_production();
+}
+
 function get_stats() {
     // Makes results div visible
     $(function() {
         $("#loading").css("visibility", "visible");
     });
     $.getJSON({
-        url: 'http://127.0.0.1:5000/stats/',
-        success: function(data) {            
+        url: 'http://' + url_ip + ':5000/stats/',
+        success: function(data) {
 
             // General statistics info
-            $('#mean_n_words').text(mean(data.n_words).toFixed(2))
-            $('#mean_types').text(mean(data.types).toFixed(2))
-            $('#mean_dil').text(mean(data.lexicalDiversity).toFixed(2))
-            $('#mean_del').text(mean(data.lexicalDensity).toFixed(2))
-            $('#mean_subs').text(mean(data.pos_subs).toFixed(2))
-            $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2))
-            $('#mean_adj').text(mean(data.pos_adj).toFixed(2))
-            $('#mean_adv').text(mean(data.pos_adv).toFixed(2))
+            $('#mean_n_words').text(mean(data.n_words).toFixed(2));
+            $('#mean_types').text(mean(data.types).toFixed(2));
+            $('#mean_dil').text(mean(data.lexicalDiversity).toFixed(2));
+            $('#mean_del').text(mean(data.lexicalDensity).toFixed(2));
+            $('#mean_subs').text(mean(data.pos_subs).toFixed(2));
+            $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2));
+            $('#mean_adj').text(mean(data.pos_adj).toFixed(2));
+            $('#mean_adv').text(mean(data.pos_adv).toFixed(2));
 
-            $('#median_n_words').text(mean(data.n_words).toFixed(2))
-            $('#median_types').text(mean(data.types).toFixed(2))
-            $('#median_dil').text(mean(data.lexicalDiversity).toFixed(2))
-            $('#median_del').text(mean(data.lexicalDensity).toFixed(2))
-            $('#median_subs').text(mean(data.pos_subs).toFixed(2))
-            $('#median_verbs').text(mean(data.pos_verbs).toFixed(2))
-            $('#median_adj').text(mean(data.pos_adj).toFixed(2))
-            $('#median_adv').text(mean(data.pos_adv).toFixed(2))
+            $('#median_n_words').text(mean(data.n_words).toFixed(2));
+            $('#median_types').text(mean(data.types).toFixed(2));
+            $('#median_dil').text(mean(data.lexicalDiversity).toFixed(2));
+            $('#median_del').text(mean(data.lexicalDensity).toFixed(2));
+            $('#median_subs').text(mean(data.pos_subs).toFixed(2));
+            $('#median_verbs').text(mean(data.pos_verbs).toFixed(2));
+            $('#median_adj').text(mean(data.pos_adj).toFixed(2));
+            $('#median_adv').text(mean(data.pos_adv).toFixed(2));
 
-            $('#mode_n_words').text(mode(data.n_words)[0])
-            $('#mode_types').text(mode(data.types)[0])
-            $('#mode_dil').text(mode(data.lexicalDiversity)[0].toFixed(2))
-            $('#mode_del').text(mode(data.lexicalDensity)[0].toFixed(2))
-            $('#mode_subs').text(mode(data.pos_subs)[0])
-            $('#mode_verbs').text(mode(data.pos_verbs)[0])
-            $('#mode_adj').text(mode(data.pos_adj)[0])
-            $('#mode_adv').text(mode(data.pos_adv)[0])
+            $('#mode_n_words').text(mode(data.n_words)[0]);
+            $('#mode_types').text(mode(data.types)[0]);
+            $('#mode_dil').text(mode(data.lexicalDiversity)[0].toFixed(2));
+            $('#mode_del').text(mode(data.lexicalDensity)[0].toFixed(2));
+            $('#mode_subs').text(mode(data.pos_subs)[0]);
+            $('#mode_verbs').text(mode(data.pos_verbs)[0]);
+            $('#mode_adj').text(mode(data.pos_adj)[0]);
+            $('#mode_adv').text(mode(data.pos_adv)[0]);
 
-            $('#sd_n_words').text(sd(data.n_words).toFixed(2))
-            $('#sd_types').text(sd(data.types).toFixed(2))
-            $('#sd_dil').text(sd(data.lexicalDiversity).toFixed(2))
-            $('#sd_del').text(sd(data.lexicalDensity).toFixed(2))
-            $('#sd_subs').text(sd(data.pos_subs).toFixed(2))
-            $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2))
-            $('#sd_adj').text(sd(data.pos_adj).toFixed(2))
-            $('#sd_adv').text(sd(data.pos_adv).toFixed(2))
+            $('#sd_n_words').text(sd(data.n_words).toFixed(2));
+            $('#sd_types').text(sd(data.types).toFixed(2));
+            $('#sd_dil').text(sd(data.lexicalDiversity).toFixed(2));
+            $('#sd_del').text(sd(data.lexicalDensity).toFixed(2));
+            $('#sd_subs').text(sd(data.pos_subs).toFixed(2));
+            $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2));
+            $('#sd_adj').text(sd(data.pos_adj).toFixed(2));
+            $('#sd_adv').text(sd(data.pos_adv).toFixed(2));
 
-            $('#lowest_n_words').text(lowest(data.n_words))
-            $('#lowest_types').text(lowest(data.types))
-            $('#lowest_dil').text(lowest(data.lexicalDiversity).toFixed(2))
-            $('#lowest_del').text(lowest(data.lexicalDensity).toFixed(2))
-            $('#lowest_subs').text(lowest(data.pos_subs))
-            $('#lowest_verbs').text(lowest(data.pos_verbs))
-            $('#lowest_adj').text(lowest(data.pos_adj))
-            $('#lowest_adv').text(lowest(data.pos_adv))
+            var lowest_idx = 0;
+            lowest_idx = lowest(data.n_words);
+            $('#lowest_n_words').text(data.n_words[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.types);
+            $('#lowest_types').text(data.types[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.lexicalDiversity);
+            $('#lowest_dil').text(data.lexicalDiversity[lowest_idx].toFixed(2) + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.lexicalDensity);
+            $('#lowest_del').text(data.lexicalDensity[lowest_idx].toFixed(2) + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_subs);
+            $('#lowest_subs').text(data.pos_subs[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_verbs);
+            $('#lowest_verbs').text(data.pos_verbs[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_adj);
+            $('#lowest_adj').text(data.pos_adj[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_adv);
+            $('#lowest_adv').text(data.pos_adv[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
 
-            $('#highest_n_words').text(highest(data.n_words))
-            $('#highest_types').text(highest(data.types))
-            $('#highest_dil').text(highest(data.lexicalDiversity).toFixed(2))
-            $('#highest_del').text(highest(data.lexicalDensity).toFixed(2))
-            $('#highest_subs').text(highest(data.pos_subs))
-            $('#highest_verbs').text(highest(data.pos_verbs))
-            $('#highest_adj').text(highest(data.pos_adj))
-            $('#highest_adv').text(highest(data.pos_adv))
+            var highest_idx = 0;
+            highest_idx = highest(data.n_words);
+            $('#highest_n_words').text(data.n_words[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.types);
+            $('#highest_types').text(data.types[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.lexicalDiversity);
+            $('#highest_dil').text(data.lexicalDiversity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.lexicalDensity);
+            $('#highest_del').text(data.lexicalDensity[highest_idx].toFixed(2) + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_subs);
+            $('#highest_subs').text(data.pos_subs[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_verbs);
+            $('#highest_verbs').text(data.pos_verbs[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_adj);
+            $('#highest_adj').text(data.pos_adj[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_adv);
+            $('#highest_adv').text(data.pos_adv[highest_idx] + ' (T' + (highest_idx+1) + ')');
 
 
             // Line Chart
@@ -144,26 +176,9 @@ function get_stats() {
                 labels: labels,
                 datasets: datasets
             };
-            const config = {
-                type: 'line',
-                data: data_chart,
-                options: {
-                    tension: 0.1,
-                    hoverOffset: 4,
-                    borderWidth: 4,
-                    pointHoverRadius: 10
-                }
-            };
 
-            if (general_line_chart == undefined) {
-                general_line_chart = new Chart(
-                    document.getElementById('general_chart'),
-                    config
-                );
-            } else {
-                general_line_chart.data = data_chart;
-                general_line_chart.update();
-            }
+            general_line_chart.data = data_chart;
+            general_line_chart.update();
 
             // Pie Chart
             var total_subs = data.pos_subs.reduce((a, b) => a + b, 0);
@@ -172,41 +187,33 @@ function get_stats() {
             var total_adv = data.pos_adv.reduce((a, b) => a + b, 0);
             var total_others = data.pos_others.reduce((a, b) => a + b, 0);
 
+            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios'];
+            general_pos_data = [total_subs, total_verbs, total_adj, total_adv];
+            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)'];
+
+            if ($("#lexitems_switch").is(':checked') == false) {
+                general_pos_labels.push('Outros');
+                general_pos_data.push(total_others);
+                general_pos_backgroudColor.push('rgb(125, 125, 125)')
+            } 
+            
             const data_pie = {
-                labels: [
-                  'Substantivos',
-                  'Verbos',
-                  'Adjetivos',
-                  'Advérbios',
-                  'Outros'
-                ],
+                labels: general_pos_labels,
                 datasets: [{
                   label: 'Comparativo total de itens gramaticais',
-                  data: [total_subs, total_verbs, total_adj, total_adv, total_others],
-                  backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(50, 205, 50)',
-                    'rgb(125, 125, 125)'
-                  ],
+                  data: general_pos_data,
+                  backgroundColor: general_pos_backgroudColor,
                   hoverOffset: 4
                 }]
             };
-            const config_pie = {
-                type: 'pie',
-                data: data_pie,
-            };
+            pos_general_pie.data = data_pie;
+            pos_general_pie.update();
 
-            if (pos_general_pie == undefined) {
-                pos_general_pie = new Chart(
-                    document.getElementById('general_pie_chart'),
-                    config_pie
-                );
-            } else {
-                pos_general_pie.data = data_pie;
-                pos_general_pie.update();
-            }
+            document.getElementById("total_subs_count").value = total_subs;
+            document.getElementById("total_verbs_count").value = total_verbs;
+            document.getElementById("total_adj_count").value = total_adj;
+            document.getElementById("total_adv_count").value = total_adv;
+            document.getElementById("total_others_count").value = total_others;
 
             // Hide loading
             $(function() {
@@ -223,7 +230,7 @@ function switch_production() {
     });
 
     $.ajax({
-        url: 'http://127.0.0.1:5000/prod_info/',
+        url: 'http://' + url_ip + ':5000/prod_info/',
         contentType: 'application/json',
         cache: false,
         method: 'POST',
@@ -320,20 +327,9 @@ function switch_production() {
                   hoverOffset: 4
                 }]
             };
-            const config = {
-                type: 'pie',
-                data: data_chart,
-            };
-
-            if (pos_prod_pie == undefined) {
-                pos_prod_pie = new Chart(
-                    document.getElementById('pos_prod_chart'),
-                    config
-                );
-            } else {
-                pos_prod_pie.data = data_chart;
-                pos_prod_pie.update();
-            }
+            
+            pos_prod_pie.data = data_chart;
+            pos_prod_pie.update();
             
             $(function() {
                 $("#loading").css("visibility", "hidden");
@@ -426,15 +422,20 @@ function mode(numbers) {
 
 function sd(numbers) {
     //return index;
-    return 0;
+    avg = mean(numbers);
+    result = [].reduce.call(numbers, (m, c) => m + Math.pow(c - avg, 2), 0);
+    result = result/numbers.length;
+    result = Math.sqrt(result);
+
+    return result;
 }
 
 function highest(numbers) {
     //return index;
-    return 0;
+    return [].reduce.call(numbers, (m, c, i, arr) => c > arr[m] ? i : m, 0);
 }
 
 function lowest(numbers) {
     //return index;
-    return 0;
+    return [].reduce.call(numbers, (m, c, i, arr) => c < arr[m] ? i : m, 0);
 }
