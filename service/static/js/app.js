@@ -2,8 +2,8 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
-//url_ip = '127.0.0.1'
-url_ip = '192.168.1.7'
+url_ip = 'localhost'
+//url_ip = '192.168.1.7'
 
 function analyze(){
     // Makes results div visible
