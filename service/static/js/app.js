@@ -10,6 +10,10 @@ function analyze(){
     $(function() {
         $("#loading").css("visibility", "visible");
     });
+
+    $("#results_button").attr("disabled", "disabled");
+    $("#add_button").attr("disabled", "disabled");
+
     var txt = $("#text_box").val();
     $.ajax({
         url: 'http://' + url_ip + ':5000/analyze/',
@@ -29,6 +33,9 @@ function analyze(){
             });
         
             $("#text_box").val('');
+            
+            $("#results_button").attr("disabled", false);
+            $("#add_button").attr("disabled", false);
         }
     });
     

@@ -34,9 +34,9 @@
                     <div class="col-3">
                         <label class="form-label" id="num_texts">{{ num_prod }}</label><label class="form-label">&nbsp;textos adicionados.</label>
                         <div class="d-grid gap-2 mx-auto">
-                            <a class="btn btn-primary btn-lg" onclick="analyze()"><i class="fas fa-plus-circle"></i>&nbsp;Add to list</a>
+                            <a class="btn btn-primary btn-lg" id="add_button" onclick="analyze()"><i class="fas fa-plus-circle"></i>&nbsp;Add to list</a>
                             <form action="/results" method="post">
-                                <button class="btn btn-primary btn-lg" ><i class="fas fa-search"></i>&nbsp;See Results</a>
+                                <button class="btn btn-primary btn-lg" id="results_button"><i class="fas fa-search"></i>&nbsp;See Results</a>
                             </form>
                         </div>
                     </div>
