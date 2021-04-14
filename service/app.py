@@ -93,7 +93,7 @@ class MainClass(Resource):
 	def post(self):
 		try: 
 			formData = request.json
-			text = str(formData['text'])
+			text = str(formData['text']).lstrip()
 			# Processing
 			n_lines = BasicMetrics.n_lines(text)
 			n_words = BasicMetrics.tokens(text)
