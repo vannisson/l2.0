@@ -65,6 +65,8 @@
                             <tr><th scope="row">Verbos</th><td id="mean_verbs"></td><td id="median_verbs"><td id="mode_verbs"></td><td id="sd_verbs"></td><td id="lowest_verbs"></td><td id="highest_verbs"></td></tr>
                             <tr><th scope="row">Adjetivos</th><td id="mean_adj"></td><td id="median_adj"><td id="mode_adj"></td><td id="sd_adj"><td id="lowest_adj"></td><td id="highest_adj"></td></tr>
                             <tr><th scope="row">Advérbios</th><td id="mean_adv"></td><td id="median_adv"><td id="mode_adv"></td><td id="sd_adv"></td><td id="lowest_adv"></td><td id="highest_adv"></td></tr>
+                            <tr><th scope="row">Pronomes</th><td id="mean_pro"></td><td id="median_pro"><td id="mode_pro"></td><td id="sd_pro"></td><td id="lowest_pro"></td><td id="highest_pro"></td></tr>
+                            <tr><th scope="row">Artigos</th><td id="mean_art"></td><td id="median_art"><td id="mode_art"></td><td id="sd_art"></td><td id="lowest_art"></td><td id="highest_art"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -112,35 +114,49 @@
                             </div>
 
                             <div class="row">
-                                <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                <label for="total_subs_count" class="col-sm-4 col-form-label">Substantivos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="total_subs_count" value="0.0">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                <label for="total_verbs_count" class="col-sm-4 col-form-label">Verbos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="total_verbs_count" value="0.0">
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                <label for="total_adj_count" class="col-sm-4 col-form-label">Adjetivos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="total_adj_count" value="0.0">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                <label for="total_adv_count" class="col-sm-4 col-form-label">Advérbios</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="total_adv_count" value="0.0">
                                 </div>
-                            </div>                
+                            </div>
+                            
+                            <div class="row">
+                                <label for="total_pro_count" class="col-sm-4 col-form-label">Pronomes</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_pro_count" value="0.0">
+                                </div>
+                            </div> 
+                            
+                            <div class="row">
+                                <label for="total_art_count" class="col-sm-4 col-form-label">Artigos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_art_count" value="0.0">
+                                </div>
+                            </div> 
 
                             <div class="row">
-                                <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                <label for="total_others_count" class="col-sm-4 col-form-label">Outros</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="total_others_count" value="0.0">
                                 </div>
@@ -228,35 +244,49 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="row">
-                                <label for="n_words" class="col-sm-4 col-form-label">Substantivos</label>
+                                <label for="subs_count" class="col-sm-4 col-form-label">Substantivos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="subs_count" value="0.0">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label for="types" class="col-sm-4 col-form-label">Verbos</label>
+                                <label for="verbs_count" class="col-sm-4 col-form-label">Verbos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="verbs_count" value="0.0">
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <label for="dil" class="col-sm-4 col-form-label">Adjetivos</label>
+                                <label for="adj_count" class="col-sm-4 col-form-label">Adjetivos</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="adj_count" value="0.0">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label for="del" class="col-sm-4 col-form-label">Advérbios</label>
+                                <label for="adv_count" class="col-sm-4 col-form-label">Advérbios</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="adv_count" value="0.0">
                                 </div>
-                            </div>                
+                            </div>
+                            
+                            <div class="row">
+                                <label for="pro_count" class="col-sm-4 col-form-label">Pronomes</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="pro_count" value="0.0">
+                                </div>
+                            </div> 
 
                             <div class="row">
-                                <label for="n_lines" class="col-sm-4 col-form-label">Outros</label>
+                                <label for="art_count" class="col-sm-4 col-form-label">Artigos</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="art_count" value="0.0">
+                                </div>
+                            </div> 
+
+                            <div class="row">
+                                <label for="others_count" class="col-sm-4 col-form-label">Outros</label>
                                 <div class="col-sm-8">
                                     <input type="text" readonly class="form-control-plaintext" id="others_count" value="0.0">
                                 </div>

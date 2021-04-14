@@ -42,7 +42,7 @@ class LexicalDensity(object):
         pos_verbs = 0
         pos_adj = 0
         pos_adv = 0
-        pos_others = 0
+        
 
         for wd in freq_dict:
             if (pos_dict[wd] == 'N' or pos_dict[wd] == 'NPROP'):
@@ -53,7 +53,22 @@ class LexicalDensity(object):
                 pos_adj += freq_dict[wd]
             elif (pos_dict[wd] == 'ADV' or pos_dict[wd] == 'ADV-KS' or pos_dict[wd] == 'ADV-KS-REL'):
                 pos_adv += freq_dict[wd]
-            else:
-                pos_others += freq_dict[wd]
-        
-        return pos_subs, pos_verbs, pos_adj, pos_adv, pos_others
+            
+        return pos_subs, pos_verbs, pos_adj, pos_adv
+
+    @staticmethod
+    def count_non_lexical_items(pos_dict,freq_dict):
+        pos_pro = 0
+        pos_art = 0
+        pos_others = 0
+
+        for wd in freq_dict:
+            if (pos_dict[wd] != 'N' and pos_dict[wd] != 'NPROP' and pos_dict[wd] != 'V' and pos_dict[wd] != 'VAUX' and pos_dict[wd] != 'ADJ' and pos_dict[wd] != 'ADV' and pos_dict[wd] != 'ADV-KS' and pos_dict[wd] != 'ADV-KS-REL'):
+                if (pos_dict[wd] == 'PROADJ' or pos_dict[wd] == 'PROPESS' or pos_dict[wd] == 'PROSUB' or pos_dict[wd] == 'PRO-KS' or pos_dict[wd] == 'PRO-KS-REL'):
+                    pos_pro += freq_dict[wd]
+                elif (pos_dict[wd] == 'ART'):
+                    pos_art += freq_dict[wd]
+                else:
+                    pos_others += freq_dict[wd]
+        print("done:" ,pos_pro,pos_art,pos_others)
+        return pos_pro, pos_art, pos_others

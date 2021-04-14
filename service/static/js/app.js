@@ -70,6 +70,8 @@ function get_stats() {
             $('#mean_verbs').text(mean(data.pos_verbs).toFixed(2));
             $('#mean_adj').text(mean(data.pos_adj).toFixed(2));
             $('#mean_adv').text(mean(data.pos_adv).toFixed(2));
+            $('#mean_pro').text(mean(data.pos_pro).toFixed(2));
+            $('#mean_art').text(mean(data.pos_art).toFixed(2));
 
             $('#median_n_words').text(mean(data.n_words).toFixed(2));
             $('#median_types').text(mean(data.types).toFixed(2));
@@ -79,6 +81,8 @@ function get_stats() {
             $('#median_verbs').text(mean(data.pos_verbs).toFixed(2));
             $('#median_adj').text(mean(data.pos_adj).toFixed(2));
             $('#median_adv').text(mean(data.pos_adv).toFixed(2));
+            $('#median_pro').text(mean(data.pos_pro).toFixed(2));
+            $('#median_art').text(mean(data.pos_art).toFixed(2));
 
             $('#mode_n_words').text(mode(data.n_words)[0]);
             $('#mode_types').text(mode(data.types)[0]);
@@ -88,6 +92,8 @@ function get_stats() {
             $('#mode_verbs').text(mode(data.pos_verbs)[0]);
             $('#mode_adj').text(mode(data.pos_adj)[0]);
             $('#mode_adv').text(mode(data.pos_adv)[0]);
+            $('#mode_pro').text(mode(data.pos_pro)[0]);
+            $('#mode_art').text(mode(data.pos_art)[0]);
 
             $('#sd_n_words').text(sd(data.n_words).toFixed(2));
             $('#sd_types').text(sd(data.types).toFixed(2));
@@ -97,6 +103,8 @@ function get_stats() {
             $('#sd_verbs').text(sd(data.pos_verbs).toFixed(2));
             $('#sd_adj').text(sd(data.pos_adj).toFixed(2));
             $('#sd_adv').text(sd(data.pos_adv).toFixed(2));
+            $('#sd_pro').text(sd(data.pos_pro).toFixed(2));
+            $('#sd_art').text(sd(data.pos_art).toFixed(2));
 
             var lowest_idx = 0;
             lowest_idx = lowest(data.n_words);
@@ -115,6 +123,10 @@ function get_stats() {
             $('#lowest_adj').text(data.pos_adj[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
             lowest_idx = lowest(data.pos_adv);
             $('#lowest_adv').text(data.pos_adv[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_pro);
+            $('#lowest_pro').text(data.pos_pro[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
+            lowest_idx = lowest(data.pos_art);
+            $('#lowest_art').text(data.pos_art[lowest_idx] + ' (T' + (lowest_idx+1) + ')');
 
             var highest_idx = 0;
             highest_idx = highest(data.n_words);
@@ -133,6 +145,10 @@ function get_stats() {
             $('#highest_adj').text(data.pos_adj[highest_idx] + ' (T' + (highest_idx+1) + ')');
             highest_idx = highest(data.pos_adv);
             $('#highest_adv').text(data.pos_adv[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_pro);
+            $('#highest_pro').text(data.pos_pro[highest_idx] + ' (T' + (highest_idx+1) + ')');
+            highest_idx = highest(data.pos_art);
+            $('#highest_art').text(data.pos_art[highest_idx] + ' (T' + (highest_idx+1) + ')');
 
 
             // Line Chart
@@ -192,13 +208,23 @@ function get_stats() {
             var total_verbs = data.pos_verbs.reduce((a, b) => a + b, 0);
             var total_adj = data.pos_adj.reduce((a, b) => a + b, 0);
             var total_adv = data.pos_adv.reduce((a, b) => a + b, 0);
+            var total_pro = data.pos_pro.reduce((a, b) => a + b, 0);
+            var total_art = data.pos_art.reduce((a, b) => a + b, 0);
             var total_others = data.pos_others.reduce((a, b) => a + b, 0);
 
-            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios'];
-            general_pos_data = [total_subs, total_verbs, total_adj, total_adv];
-            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)'];
+            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios', 'Pronomes','Artigos'];
+            general_pos_data = [total_subs, total_verbs, total_adj, total_adv, total_pro, total_art];
+            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)', 'rgb(132,49,205)','rgb(249,168,75)'];
 
             if ($("#lexitems_switch").is(':checked') == false) {
+                general_pos_labels.push('Pronomes');
+                general_pos_data.push(total_pro);
+                general_pos_backgroudColor.push('rgb(132, 49, 205)')
+
+                general_pos_labels.push('Artigos');
+                general_pos_data.push(total_pro);
+                general_pos_backgroudColor.push('rgb(249, 168, 75)')
+
                 general_pos_labels.push('Outros');
                 general_pos_data.push(total_others);
                 general_pos_backgroudColor.push('rgb(125, 125, 125)')
@@ -220,6 +246,8 @@ function get_stats() {
             document.getElementById("total_verbs_count").value = total_verbs;
             document.getElementById("total_adj_count").value = total_adj;
             document.getElementById("total_adv_count").value = total_adv;
+            document.getElementById("total_pro_count").value = total_pro;
+            document.getElementById("total_art_count").value = total_art;
             document.getElementById("total_others_count").value = total_others;
 
             // Hide loading
@@ -264,6 +292,8 @@ function switch_production() {
             var verbs = 0;
             var adj = 0;
             var adv = 0;
+            var pro = 0;
+            var art = 0;
             var others = 0;
 
             for(var wd in frequencies) {
@@ -287,10 +317,10 @@ function switch_production() {
                     adv += frequencies[wd];
                 } else if (data.pos[wd] == 'ART') {
                     pos_tag = 'ARTIGO';
-                    others += frequencies[wd];
+                    art += frequencies[wd];
                 } else if (data.pos[wd] == 'PROADJ' || data.pos[wd] == 'PROPESS' || data.pos[wd] == 'PROSUB' || data.pos[wd] == 'PRO-KS' || data.pos[wd] == 'PRO-KS-REL') {
                     pos_tag = 'PRONOME';
-                    others += frequencies[wd];
+                    pro += frequencies[wd];
                 } else if (data.pos[wd] == 'PREP') {
                     pos_tag = 'PREPOSIÇÃO';
                     others += frequencies[wd];
@@ -310,6 +340,8 @@ function switch_production() {
             document.getElementById("verbs_count").value = verbs;
             document.getElementById("adj_count").value = adj;
             document.getElementById("adv_count").value = adv;
+            document.getElementById("pro_count").value = pro;
+            document.getElementById("art_count").value = art;
             document.getElementById("others_count").value = others;
 
             // pie_chart
@@ -319,17 +351,21 @@ function switch_production() {
                   'Verbos',
                   'Adjetivos',
                   'Advérbios',
+                  'Pronomes',
+                  'Artigos',
                   'Outros'
                 ],
                 datasets: [{
                   label: 'Comparativo itens gramaticais',
-                  data: [subs, verbs, adj, adv, others],
+                  data: [subs, verbs, adj, adv, pronomes, artigos, others],
                   backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
                     'rgb(255, 205, 86)',
                     'rgb(50, 205, 50)',
-                    'rgb(125, 125, 125)'
+                    'rgb(125, 125, 125)',
+                    'rgb(132,49,205)',
+                    'rgb(249,168,75)'
                   ],
                   hoverOffset: 4
                 }]
