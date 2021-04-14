@@ -176,7 +176,7 @@ function get_stats() {
 
             labels = []
             for (var i = 1; i <= data.types.length; i++) {
-                labels.push('P' + i);
+                labels.push('T' + i);
             }
 
             const data_chart = {
