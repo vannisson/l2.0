@@ -43,9 +43,9 @@ function analyze(){
 
 function initResults() {
 
-    pos_prod_pie = new Chart($('#pos_prod_chart')[0], {type: 'pie'});
-    general_line_chart = new Chart($('#general_chart')[0], {type: 'line', options: {tension: 0.1, hoverOffset: 4, borderWidth: 4, pointHoverRadius: 10}});
-    pos_general_pie = new Chart($('#general_pie_chart')[0], {type: 'pie'});
+    pos_prod_pie = new Chart($('#pos_prod_chart')[0], {type: 'pie', options: {maintainAspectRatio: false, responsive: false}});
+    general_line_chart = new Chart($('#general_chart')[0], {type: 'line', options: {tension: 0.1, hoverOffset: 4, borderWidth: 4, pointHoverRadius: 10, maintainAspectRatio: false, responsive: false}});
+    pos_general_pie = new Chart($('#general_pie_chart')[0], {type: 'pie', options: {maintainAspectRatio: false, responsive: false}});
 
     get_stats();
     
