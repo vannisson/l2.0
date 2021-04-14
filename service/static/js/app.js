@@ -212,9 +212,9 @@ function get_stats() {
             var total_art = data.pos_art.reduce((a, b) => a + b, 0);
             var total_others = data.pos_others.reduce((a, b) => a + b, 0);
 
-            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios', 'Pronomes','Artigos'];
-            general_pos_data = [total_subs, total_verbs, total_adj, total_adv, total_pro, total_art];
-            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)', 'rgb(132,49,205)','rgb(249,168,75)'];
+            general_pos_labels = ['Substantivos', 'Verbos', 'Adjetivos', 'Advérbios'];
+            general_pos_data = [total_subs, total_verbs, total_adj, total_adv];
+            general_pos_backgroudColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(50, 205, 50)'];
 
             if ($("#lexitems_switch").is(':checked') == false) {
                 general_pos_labels.push('Pronomes');
@@ -357,15 +357,15 @@ function switch_production() {
                 ],
                 datasets: [{
                   label: 'Comparativo itens gramaticais',
-                  data: [subs, verbs, adj, adv, pronomes, artigos, others],
+                  data: [subs, verbs, adj, adv, pro, art, others],
                   backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
                     'rgb(255, 205, 86)',
                     'rgb(50, 205, 50)',
-                    'rgb(125, 125, 125)',
                     'rgb(132,49,205)',
-                    'rgb(249,168,75)'
+                    'rgb(249,168,75)',
+                    'rgb(125, 125, 125)'
                   ],
                   hoverOffset: 4
                 }]
