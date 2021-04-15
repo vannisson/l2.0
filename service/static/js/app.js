@@ -223,7 +223,7 @@ function get_stats() {
 
                 general_pos_labels.push('Artigos');
                 general_pos_data.push(total_pro);
-                general_pos_backgroudColor.push('rgb(249, 168, 75)')
+                general_pos_backgroudColor.push('rgb(162, 122, 61)')
 
                 general_pos_labels.push('Outros');
                 general_pos_data.push(total_others);
@@ -345,28 +345,30 @@ function switch_production() {
             document.getElementById("others_count").value = others;
 
             // pie_chart
+            prod_label = ['Substantivos','Verbos','Adjetivos','Advérbios'];
+            prod_data = [subs, verbs, adj, adv];
+            prod_background = ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(50, 205, 50)'];
+            
+            if ($("#lexitems_prod_switch").is(':checked') == false) {
+               prod_label.push('Pronomes');
+               prod_data.push(pro);
+               prod_background.push('rgb(132, 49, 205)')
+
+               prod_label.push('Artigos');
+               prod_data.push(pro);
+               prod_background.push('rgb(162, 122, 61)')
+
+               prod_label.push('Outros');
+               prod_data.push(others);
+               prod_background.push('rgb(125, 125, 125)')
+            }
+            
             const data_chart = {
-                labels: [
-                  'Substantivos',
-                  'Verbos',
-                  'Adjetivos',
-                  'Advérbios',
-                  'Pronomes',
-                  'Artigos',
-                  'Outros'
-                ],
+                labels: prod_label,
                 datasets: [{
                   label: 'Comparativo itens gramaticais',
-                  data: [subs, verbs, adj, adv, pro, art, others],
-                  backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(50, 205, 50)',
-                    'rgb(132,49,205)',
-                    'rgb(249,168,75)',
-                    'rgb(125, 125, 125)'
-                  ],
+                  data: prod_data,
+                  backgroundColor: prod_background,
                   hoverOffset: 4
                 }]
             };
