@@ -78,6 +78,14 @@ def show_results():
 	else:
 		return render_template('error.html')
 
+@app.route('/about_project', methods=['GET'])
+def show_about_project():
+		return render_template('about_project.html')
+
+@app.route('/about_people', methods=['GET'])
+def show_about_people():
+		return render_template('about_people.html')
+
 # API request reponses
 @analyze_ns.route("/")
 class MainClass(Resource):

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+        <h2 class="text-center">Lexicanalytics é um projeto desenvolvido pelo LAME</h2>
+        <div class="container" id="about_LAME">
+            <div class="row">
+                <img src="{{ url_for('static',filename='img/brasao-ufal.png') }}" class="rounded float-start" alt="Logo da UFAL">
+                <img src="{{ url_for('static',filename='img/lame_logo.jpeg') }}" class="rounded float-end" alt="Logo da Lame">
+                  
+            </div> 
+        </div>
+{% endblock %}
