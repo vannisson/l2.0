@@ -376,6 +376,8 @@ function switch_production() {
             pos_prod_pie.data = data_chart;
             pos_prod_pie.update();
             
+            $('#details_table').DataTable();
+
             $(function() {
                 $("#loading").css("visibility", "hidden");
             });
