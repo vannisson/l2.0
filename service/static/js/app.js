@@ -376,7 +376,24 @@ function switch_production() {
             pos_prod_pie.data = data_chart;
             pos_prod_pie.update();
             
-            $('#details_table').DataTable();
+            $('#details_table').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ palavras por página",
+                    "zeroRecords": "Nada encontrado - Desculpa :(",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Não há palavras disponíveis",
+                    "infoFiltered": "(filtrado de um total de _MAX_ palavras)",
+                    "search": "Buscar: ",
+                    "thousands": ".",
+                    "loadingRecords": "Carregando...",
+                    "paginate": {
+                        "first":      "Primeiro",
+                        "last":       "Último",
+                        "next":       "Próximo",
+                        "previous":   "Anterior"
+                    },
+                }
+            });
 
             $(function() {
                 $("#loading").css("visibility", "hidden");
