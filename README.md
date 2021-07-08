@@ -7,7 +7,7 @@ While the previous version of Lexicanalytics was developed in Java, this one is 
 ## How to make it work?
 This project is encapsulated in docker containers and run with docker-compose. To run locally, one just needs to clone this repository:
 
-`git clone https://github.com/vannisson/lexicanalyticsWeb.git`
+`$ git clone https://github.com/vannisson/lexicanalyticsWeb.git`
 
 and build the images using:
 
