@@ -19,40 +19,25 @@
 </head>
 
 <body {% block body_attrs %} {% endblock %}>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/index"><i class="fas fa-home"></i>&nbsp;Início</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-question-circle"></i>&nbsp;Sobre
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/about_project"><i class="fas fa-laptop-code"></i>&nbsp;Programa</a></li>
-                            <li><a class="dropdown-item" href="/about_people"><i class="fas fa-user-friends"></i>&nbsp;Autores</a></li>
-                        </ul>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-bug"></i>&nbsp;Reportar</a>
-                        </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    
     <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-md-2">
-                <img src="{{ url_for('static',filename='img/logo.svg') }}" id="logo" />
-            </div>
-            <div class="col-md-5">
-                <h1>Lexicanalytics Web</h1>
-                <h3>Análise textual e estatística</h3>
-            </div>
-        </div>
-    </div>
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img class="bi me-2" width="75" height="50"src="{{ url_for('static',filename='img/logo.svg') }}"/>
+            <span class="fs-4"> Lexicanalytics Web</span>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link"href="/index"><i class="fas fa-home"></i>&nbsp;Início</a></li>
+            <li class="nav-item"><a class="nav-link"href="/about_project"><i class="fas fa-laptop-code"></i>&nbsp;Projeto</a></li>
+            <li class="nav-item"><a class="nav-link"href="/about_people"><i class="fas fa-user-friends"></i>&nbsp;Colaboradores</a></li>
+            <li class="nav-item"><a class="nav-link"><i class="fas fa-bug"></i>&nbsp;Bugs?</a></li>
+          </ul>
+        </header>
+      </div>
+
+    
+
     <div id="content">{% block content %}{% endblock %}</div>
 
     <footer class="container">© 2021 Copyright: Universidade Federal de Alagoas </footer>

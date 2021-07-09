@@ -2,8 +2,8 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
-//url_ip = 'localhost'
-url_ip = '35.199.91.93'
+url_ip = 'localhost'
+//url_ip = '35.199.91.93'
 
 function analyze(){
     // Makes results div visible
@@ -13,6 +13,7 @@ function analyze(){
 
     $("#results_button").attr("disabled", "disabled");
     $("#add_button").attr("disabled", "disabled");
+    $("#delete_button").attr("disabled", "disabled");
 
     var txt = $("#text_box").val();
     $.ajax({
@@ -36,6 +37,7 @@ function analyze(){
             
             $("#results_button").attr("disabled", false);
             $("#add_button").attr("disabled", false);
+            $("#delete_button").attr("disabled", false);
         }
     });
     
@@ -403,6 +405,30 @@ function switch_production() {
 
 }
 
+function delete_texts(){
+    $(function() {
+        $("#loading").css("visibility", "visible");
+    });
+    
+    $("#results_button").attr("disabled", "disabled");
+    $("#add_button").attr("disabled", "disabled");
+    $("#delete_button").attr("disabled", "disabled");
+    
+    $.ajax({
+        url: 'http://' + url_ip + ':5000/delete/',
+        cache: false,
+        method: 'POST',
+        success: function(data) {            
+            $(function() {
+                $("#loading").css("visibility", "hidden");
+            });
+            $("#num_texts").text(parseInt($("#num_texts").text()) - 1);
+            $("#results_button").attr("disabled", false);
+            $("#add_button").attr("disabled", false);
+            $("#delete_button").attr("disabled", false);
+        }
+    });
+}
 // UTILS
 //
 // Calculating the average/mean

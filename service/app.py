@@ -39,6 +39,7 @@ api = Api(app = app,
 analyze_ns = api.namespace('analyze', description='Gets text and analyses.')
 prod_info_ns = api.namespace('prod_info', description='Returns production info.')
 stats_ns = api.namespace('stats', description='Returns productions basic stats info.')
+delete_texts_ns = api.namespace('delete', description='Delete all the texts.')
 
 analyze_model = api.model('Analyze params', 
 				  {'text': fields.String(required = True, 
@@ -217,3 +218,28 @@ class MainClass(Resource):
 				"status": "Could not make prediction",
 				"error": str(error)
 			})
+
+@delete_texts_ns.route("/")
+class MainClass(Resource):
+	def options(self):
+		response = make_response()
+		response.headers.add("Access-Control-Allow-Origin", "*")
+		response.headers.add('Access-Control-Allow-Headers', "*")
+		response.headers.add('Access-Control-Allow-Methods', "*")
+		return response
+
+	def post(self):
+		try: 
+			if (os.path.exists(csv_filepath)):
+				os.remove(csv_filepath)
+			response = '{"statusCode": 200, "status": "Query made"}'
+			response = Response(json.dumps(json.loads(response), ensure_ascii=False), mimetype='application/json')
+			response.headers.add('Access-Control-Allow-Origin', '*')
+			return response
+	
+		except Exception as error:
+			return jsonify({
+				"statusCode": 500,
+				"status": "Could not make prediction",
+				"error": str(error)
+		})
