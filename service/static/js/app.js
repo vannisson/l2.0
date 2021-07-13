@@ -422,7 +422,7 @@ function delete_texts(){
             $(function() {
                 $("#loading").css("visibility", "hidden");
             });
-            $("#num_texts").text(parseInt($("#num_texts").text()) - 1);
+            $("#num_texts").text(parseInt($("#num_texts").text()) - parseInt($("#num_texts").text()) );
             $("#results_button").attr("disabled", false);
             $("#add_button").attr("disabled", false);
             $("#delete_button").attr("disabled", false);
