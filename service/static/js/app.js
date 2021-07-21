@@ -11,10 +11,6 @@ function analyze(){
         $("#loading").css("visibility", "visible");
     });
 
-    $("#results_button").attr("disabled", "disabled");
-    $("#add_button").attr("disabled", "disabled");
-    $("#delete_button").attr("disabled", "disabled");
-
     var txt = $("#text_box").val();
     $.ajax({
         url: 'http://' + url_ip + ':5000/analyze/',
@@ -35,9 +31,6 @@ function analyze(){
         
             $("#text_box").val('');
             
-            $("#results_button").attr("disabled", false);
-            $("#add_button").attr("disabled", false);
-            $("#delete_button").attr("disabled", false);
         }
     });
     
@@ -410,10 +403,6 @@ function delete_texts(){
         $("#loading").css("visibility", "visible");
     });
     
-    $("#results_button").attr("disabled", "disabled");
-    $("#add_button").attr("disabled", "disabled");
-    $("#delete_button").attr("disabled", "disabled");
-    
     $.ajax({
         url: 'http://' + url_ip + ':5000/delete/',
         cache: false,
@@ -423,11 +412,22 @@ function delete_texts(){
                 $("#loading").css("visibility", "hidden");
             });
             $("#num_texts").text(parseInt($("#num_texts").text()) - parseInt($("#num_texts").text()) );
-            $("#results_button").attr("disabled", false);
-            $("#add_button").attr("disabled", false);
-            $("#delete_button").attr("disabled", false);
         }
     });
+}
+
+function checkText(){
+    var txt = $("#text_box").val();
+    if (txt.length == 0){
+        $("#results_button").attr("disabled", "disabled");
+        $("#add_button").attr("disabled", "disabled");
+        $("#delete_button").attr("disabled", "disabled");
+    }
+    else{
+        $("#results_button").attr("disabled", false);
+        $("#add_button").attr("disabled", false);
+        $("#delete_button").attr("disabled", false);
+    }
 }
 // UTILS
 //
