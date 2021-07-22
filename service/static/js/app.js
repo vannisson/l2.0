@@ -418,16 +418,25 @@ function delete_texts(){
 
 function checkText(){
     var txt = $("#text_box").val();
-    if (txt.length == 0){
-        $("#results_button").attr("disabled", "disabled");
-        $("#add_button").attr("disabled", "disabled");
-        $("#delete_button").attr("disabled", "disabled");
-    }
-    else{
+
+    if ($("#num_texts").text()>=1){
         $("#results_button").attr("disabled", false);
-        $("#add_button").attr("disabled", false);
         $("#delete_button").attr("disabled", false);
+
+        if (txt.length == 0)
+        {$("#add_button").attr("disabled", "disabled");}
+        
+        else
+        {$("#add_button").attr("disabled", false);}
     }
+
+    else{
+        if (txt.length == 0)
+        {$("#add_button").attr("disabled", "disabled");}
+        
+        else
+        {$("#add_button").attr("disabled", false);}
+    }  
 }
 // UTILS
 //
