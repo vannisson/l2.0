@@ -2,52 +2,39 @@
 {% block content %}
     <div class="container p-1 p-sm-3">
         <div class=row>    
-            <div class="col-12 text-center">
+            <div class="text-center">
                 <h2>Lexicanalytics é um projeto desenvolvido pelo LAME</h2>
-            <!-- </div class="col-6">
-                <img src="{{ url_for('static',filename='img/logo.svg') }}" class="rounded mx-auto d-block" alt="Logo">
-            <div> -->
-
             </div>
+        </div>
 
-            <div class="col-md-3" >
-                <img src="{{ url_for('static',filename='img/lame_logo.jpeg') }}" class= "img-fluid rounded float-end col-8" alt="Logo do Lame">
-            </div>
-
-            <div class= "col-9">
+        <div class=row>
+            <div class="col-2" >
+              <img src="{{ url_for('static',filename='img/logo.svg') }}" height="150" width="150" alt="Logo do Lexicanalytics">
+            </div>    
+            <div class= "col-10 text-left">
                 <p>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    Lexicanalytics é uma plataforma web para ajudar pesquisadores/profissionais de
+                    áreas como a linguística e educação na extração de informações lexicais relevantes
+                    de textos, como densidade e diversidade lexical, frequência de palavras e classificação
+                    morfológica de palavras.
                 </p>
                 
+                <p>
+                    A plataforma surgiu através de um projeto criado pelo Laboratório do Manuscrito Escolar(LAME), que faz parte da 
+                    Universidade Federal de Alagoas(UFAL), em um Programa Institucional de Bolsas de Iniciação em Desenvolvimento 
+                    Tecnológico e Inovação(PIBITI).
+                </p>
+
+            </div>
+        </div>
+        
+        <div class=row>
+            <div class="col-4" >
+                <a href="" ><img src="{{ url_for('static',filename='img/lame_logo.jpeg') }}" height="150" width="150"  alt="Logo do LAME"></a>
             </div>
         </div>
 
-        <div class=row>    
-            <div class="col-md-3" >
-                <img src="{{ url_for('static',filename='img/brasao-ufal.png') }}" class= "img-fluid rounded float-end col-8" alt="Logo do Lame">
-            </div>
-
-            <div class= "col-9">
-                <p>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </p>
-
-                <p>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </p>
-                <p>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </p>
-            </div>
-        </div>
+        
 
         <div class="row">
             <div class="col-12 text-center">
