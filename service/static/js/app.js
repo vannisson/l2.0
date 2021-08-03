@@ -12,6 +12,9 @@ function analyze(){
     });
 
     var txt = $("#text_box").val();
+
+
+    
     $.ajax({
         url: 'http://' + url_ip + ':5000/analyze/',
         contentType: 'application/json',

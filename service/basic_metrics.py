@@ -16,6 +16,7 @@ class BasicMetrics(object):
         text = text.replace(".",'')
         text = text.replace(",",'')
         text = text.replace(":",'')
+        text = text.replace("-",'')
         text = text.lower()
         result = re.split("[^\w]+", text)
         
