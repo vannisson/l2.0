@@ -1,4 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container pt-4 pb-5 border-bottom">
+        
+  <div class="row text-center">   
+    <h2 class="text-center pb-2">Desenvolvedores</h2>
+    <div class="col p-2">
+      <img class="img-fluid rounded-circle" src="{{ url_for('static',filename='img/geovane-foto.jpg') }}" alt="Geovane-foto" media-simple="true">
+      <h4 class="pt-4">Geovane Filho</a></h4>
+      <p style="text-align: justify;"> Estudante de Ciência da Computação
+          pela Universidade Federal de Alagoas. Participa de projetos relacionados a Aprendizagem de Máquina que possuam o foco em Processamento de Linguagem Natural. Atualmente focado no desenvolvimento
+          do Lexicanalytics Web.
+          
+      </p>
+    </div>
+
+    <div class="col-1"></div>
+    
+    <div class="col p-2">
+        <img class="img-fluid rounded-circle" src="{{ url_for('static',filename='img/glauber-foto.jpg') }}" alt="Glauber-foto" media-simple="true">
+        <h4 class="pt-4">Glauber Leite</a></h4>
+        <p style="text-align: justify;">Engenheiro de Computação formado pela Universidade Federal de Alagoas. Atua em projetos relacionados a robótica cooperativa e sistemas de controle inteligente.
+           Atualmente está envolvido na pesquisa de veículos autônomos marítimos e aéreos trabalhando cooperativamente em tarefas de rastreamento de óleo e poluentes no oceano.
+           Além disso, fez parte de projetos de automação relacionados a sistemas embarcados, 
+           inteligência artificial, energia solar, entre outros. Trabalha na Universidade Federal de Alagoas como Técnico em Tecnologia de Informação.
+        </p>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-6 pb-5">
+  <div class="row text-center">
+    <h2 class="text-center pb-2">Pesquisadores</h2>
+      <div class="col p-2">
+        <img class="img-fluid rounded-circle" src="{{ url_for('static',filename='img/elian-foto.jpg') }}" alt="Elian-foto" media-simple="true">
+        <h4 class="pt-4">Elian Silva</a></h4>
+        <p style="text-align: justify;"> Doutoranda em... 
+        </p>
+      </div>
+
+      <div class="col-1"></div>
+      
+      <div class="col p-2">
+      <img class="img-fluid rounded-circle" src="{{ url_for('static',filename='img/calil-foto.jpg') }}" alt="Calil-foto" media-simple="true">
+      <h4 class="pt-4">Eduardo Calil</a></h4>
+      <p style="text-align: justify;">Professor da Universidade Federal de Alagoas...
+      </p>
+    </div>
+
+      
+  </div>
+
+</div>
+
 {% endblock %}
