@@ -5,6 +5,17 @@ let pos_general_pie;
 url_ip = 'localhost'
     //url_ip = '35.199.91.93'
 
+window.onload = initPage;
+
+function initPage() {
+    if ($("#num_texts").text() >= 1) {
+        $("#results_button").attr("disabled", false);
+        $("#delete_button").attr("disabled", false);
+    } else {
+
+    }
+}
+
 function analyze() {
     // Makes results div visible
     $(function() {
@@ -379,6 +390,7 @@ function switch_production() {
             pos_prod_pie.update();
 
             $('#details_table').DataTable({
+                retrieve: true,
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ palavras por página",
                     "zeroRecords": "Nada encontrado - Desculpa :(",
@@ -426,6 +438,7 @@ function delete_texts() {
 
             }
         }
+
     });
 }
 

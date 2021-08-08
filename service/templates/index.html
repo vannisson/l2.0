@@ -1,31 +1,30 @@
-{% extends "base.html" %}
-{% block content %}
-        <div class="container" id="text_input">
-            <div class="row">
-                    <div class="col-sm-9">
-                        <label class="form-label">Insira o texto:</label>
-                        <textarea type="text" id="text_box" onchange="checkText()" class="form-control" placeholder="Digite aqui o seu texto" style="height: 25vw"></textarea>
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label" id="num_texts">{{ num_prod }}</label><label class="form-label">&nbsp;textos adicionados.</label>
-                        <div class="d-grid gap-3 mx-auto">
-                            <button disabled class="btn btn-primary btn-lg" id="add_button" onclick="analyze()"><i class="fas fa-plus-circle"></i>&nbsp;Adicionar à lista</button>
-                            <form class="d-grid" action="/results" method="post">
-                                <button disabled class="btn btn-primary btn-lg" id="results_button"><i class="fas fa-search"></i>&nbsp;Ver resultados</button>
-                            </form>
-                            <button disabled class="btn btn-primary btn-lg" id="delete_button" onclick="delete_texts()"><i class="fas fa-minus-circle"></i></i>&nbsp;Remover produções</button>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+{% extends "base.html" %} {% block content %}
+<div class="container" id="text_input">
+    <div class="row">
+        <div class="col-sm-9">
+            <label class="form-label">Insira o texto:</label>
+            <textarea type="text" id="text_box" onchange="checkText()" class="form-control" placeholder="Digite aqui o seu texto" style="height: 25vw"></textarea>
         </div>
-
-        <div class="container" id="loading">
-            <div class="d-flex justify-content-center mt-3">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Carregando...</span>
-                </div>
+        <div class="col-3">
+            <label class="form-label" id="num_texts">{{ num_prod }}</label><label class="form-label">&nbsp;textos adicionados.</label>
+            <div class="d-grid gap-3 mx-auto">
+                <button disabled class="btn btn-primary btn-lg" id="add_button" onclick="analyze()"><i class="fas fa-plus-circle"></i>&nbsp;Adicionar à lista</button>
+                <form class="d-grid" action="/results" method="post">
+                    <button disabled class="btn btn-primary btn-lg" id="results_button"><i class="fas fa-search"></i>&nbsp;Ver resultados</button>
+                </form>
+                <button disabled class="btn btn-primary btn-lg" id="delete_button" onclick="delete_texts()"><i class="fas fa-minus-circle"></i></i>&nbsp;Remover produções</button>
             </div>
         </div>
-        
+    </div>
+</div>
+</div>
+
+<div class="container" id="loading">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

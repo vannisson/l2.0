@@ -19,115 +19,113 @@
 </head>
 
 <body {% block body_attrs %} {% endblock %}>
-    
+
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a href="/index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img class="bi me-2" width="75" height="50"src="{{ url_for('static',filename='img/logo.svg') }}"/>
-            <span class="fs-4"> <b>Lexicanalytics Web</b></span>
-          </a>
-    
-          <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link"href="/index"><i class="fas fa-home"></i>&nbsp;Início</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-question-circle"></i>&nbsp;Sobre
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li class="nav-item"><a class="nav-link"href="/about_project"><i class="fas fa-search"></i></i>&nbsp;&nbsp;Projeto</a></li>
-                <li class="nav-item"><a class="nav-link"href="/about_people"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;Pessoas</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link"><i class="fas fa-bug"></i>&nbsp;Bugs?</a></li>
-          </ul>
-        </header>
-      </div>
+            <a href="/index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <img class="bi me-2" width="75" height="50" src="{{ url_for('static',filename='img/logo.svg') }}" />
+                <span class="fs-4"> <b>Lexicanalytics Web</b></span>
+            </a>
 
-    
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="/index"><i class="fas fa-home"></i>&nbsp;Início</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-question-circle"></i>&nbsp;Sobre
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item"><a class="nav-link" href="/about_project"><i class="fas fa-search"></i></i>&nbsp;&nbsp;Projeto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about_people"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;Pessoas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link"><i class="fas fa-cog"></i>&nbsp;<del>Preferências</del></a></li>
+                <li class="nav-item"><a class="nav-link"><i class="fas fa-bug"></i>&nbsp;<del>Bugs?</del></a></li>
+            </ul>
+        </header>
+    </div>
 
     <div id="content">{% block content %}{% endblock %}</div>
 
     <footer class="text-center text-lg-start text-muted p-1">
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-      </section>
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        </section>
 
-      <section class="">
-        <div class="container text-center text-md-start mt-5 p-1">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <!-- Content -->
-              
-              <h6 class="text-uppercase fw-bold mb-4">
-                Sobre a ferramenta:
-              </h6>
+        <section class="">
+            <div class="container text-center text-md-start mt-5 p-1">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
 
-              <p style="text-align: justify;">
-                Lexicanalytics Web é uma ferramenta online com o intuito de ajudar pesquisadores e profissionais
-                de áreas como a linguística e educação durante a extração de informações lexicais importantes de textos e manuscritos.
-              </p>
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Sobre a ferramenta:
+                        </h6>
 
+                        <p style="text-align: justify;">
+                            Lexicanalytics Web é uma ferramenta online com o intuito de ajudar pesquisadores e profissionais de áreas como a linguística e educação durante a extração de informações lexicais importantes de textos.
+                        </p>
+
+                    </div>
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Sobre a Universidade:
+                        </h6>
+                        <div class="text-center">
+                            <a href="https://ufal.br/" target="_blank"><img src="{{ url_for('static',filename='img/ufal-logo.png') }}" alt="Ufal-Logo" height="150" width="150" title="" media-simple="true"></a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Sobre o CNPq:
+                        </h6>
+                        <div class="text-center">
+                            <a href="https://www.gov.br/cnpq/pt-br" target="_blank"><img src="{{ url_for('static',filename='img/logo_cnpq.svg') }}" alt="Lame-Logo" height="145" width="160" title="" media-simple="true"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Sobre o LAME:
+                        </h6>
+                        <div class="text-center">
+                            <a href="" target="_blank"><img src="{{ url_for('static',filename='img/lame_logo.jpeg') }}" alt="Lame-Logo" height="145" width="160" title="" media-simple="true"></a>
+                        </div>
+                    </div>
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Veja mais abaixo:
+                        </h6>
+                        <p>
+                            <a href="/about_project" class="text-reset" style="text-decoration:none"><i class="fas fa-search"></i>&nbsp;Projeto</a>
+                        </p>
+                        <p>
+                            <a href="/about_people" class="text-reset" style="text-decoration:none"><i class="fas fa-user-friends"></i>&nbsp;Colaboradores</a>
+                        </p>
+                        <p>
+                            <a class="text-secondary" style="text-decoration:none"><i class="fas fa-cog"></i>&nbsp;<del>Preferências</del></a>
+                        </p>
+                        <p>
+                            <a href="https://github.com/vannisson/lexicanalyticsWeb" class="text-reset" style="text-decoration:none"><i class="fab fa-github"></i>&nbsp;Github</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Grid row -->
             </div>
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">
-                Sobre a Universidade:
-              </h6>
-              <div class="text-center">
-              <a href="https://ufal.br/" target="_blank"><img src="{{ url_for('static',filename='img/ufal-logo.png') }}" alt="Ufal-Logo" height="150" width="150" title="" media-simple="true"></a>
-              </div>
-            </div>
-
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">
-                Sobre o CNPq:
-              </h6>
-              <div class="text-center">
-              <a href="https://www.gov.br/cnpq/pt-br" target="_blank"><img src="{{ url_for('static',filename='img/logo_cnpq.svg') }}" alt="Lame-Logo" height="145" width="160"title="" media-simple="true"></a>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">
-                Sobre o LAME:
-              </h6>
-              <div class="text-center">
-              <a href="" target="_blank"><img src="{{ url_for('static',filename='img/lame_logo.jpeg') }}" alt="Lame-Logo" height="145" width="160"title="" media-simple="true"></a>
-              </div>
-            </div>
-    
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                Veja mais abaixo:
-              </h6>
-              <p>
-                <a href="/about_project" class="text-reset"style="text-decoration:none"><i class="fas fa-search"></i>&nbsp;Projeto</a>
-              </p>
-              <p>
-                <a href="/about_people" class="text-reset"style="text-decoration:none"><i class="fas fa-user-friends"></i>&nbsp;Colaboradores</a>
-              </p>
-              <p>
-                <a href="#!" class="text-secondary" style="text-decoration:none"><i class="fas fa-bug"></i>&nbsp;Reportar Bugs</a>
-              </p>
-              <p>
-                <a href="https://github.com/vannisson/lexicanalyticsWeb" class="text-reset"style="text-decoration:none"><i class="fab fa-github"></i>&nbsp;Github</a>
-              </p>
-            </div>
-          </div>
-          <!-- Grid row -->
+        </section>
+        <div class="text-center p-4">
+            Versão: 0.9 | © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://ufal.br/" target="_blank">Universidade Federal de Alagoas</a>
         </div>
-      </section>
-      <div class="text-center p-4">
-        Versão: 0.8 | © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://ufal.br/" target="_blank">Universidade Federal de Alagoas</a>
-      </div>
     </footer>
-     
+
 </body>
 
 </html>

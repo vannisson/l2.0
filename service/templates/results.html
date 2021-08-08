@@ -1,10 +1,15 @@
 {% extends "base.html" %} {% block body_attrs %} onload="initResults();" {% endblock %} {% block content %}
-<h2 class="text-center">Resultados</h2>
+<div class="container pt-1 pb-2">
+    <div class="row ">
+        <div class="col-2"><a class="btn btn-primary " id="add_button_results" href="/index"><i class="fas fa-arrow-circle-left"></i>&nbsp;Voltar</a></div>
+        <div class="col"></div>
+    </div>
+</div>
 
-<div class="container" id="all_prod_results">
-    <h3 class="text-center">Todos textos:</h3>
+<div class="container pt-2 pb-5 border-bottom" id="all_prod_results">
+    <h3 class="text-center pt-2">Resultado Geral:</h3>
 
-    <ul class="nav nav-pills" id="generalTab" role="tablist">
+    <ul class="nav nav-pills pb-3" id="generalTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general" type="button" role="tab" aria-controls="general" aria-selected="true">Geral</button>
         </li>
@@ -223,25 +228,20 @@
 
 </div>
 
-<div class="container" id="loading">
-    <div class="d-flex justify-content-center mt-3">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Carregando...</span>
+<div class="container pt-5" id="results">
+    <h3 class="text-center pb-2">Resultados por texto:</h3>
+    <div class="row">
+        <div class="col-2">
+            <select id='production' onchange="switch_production();" class="form-select mb-3" aria-label="Default select example">
+                            {% for i in range(num_prod) %}
+                            <option value="{{i}}">T{{ i + 1 }}</option>
+                            {% endfor %}
+
+                        </select>
         </div>
+        <div class="col"></div>
     </div>
-</div>
-
-<div class="container" id="results">
-    <h3 class="text-center">Resultados por texto</h3>
-
-    <select id='production' onchange="switch_production();" class="form-select" aria-label="Default select example">
-                {% for i in range(num_prod) %}
-                <option value="{{i}}">T{{ i + 1 }}</option>
-                {% endfor %}
-
-            </select>
-
-    <ul class="nav nav-pills" id="myTab" role="tablist">
+    <ul class="nav nav-pills pb-3" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">Texto</button>
         </li>
@@ -260,14 +260,14 @@
     <div class="tab-content" id="myTabContent">
 
         <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
-            <textarea type="text" readonly id="text_box" class="form-control" style="height: 25vw"></textarea>
+            <textarea type="text" readonly id="text_box" class="form-control" style="height: 25vw; background-color: rgb(255, 255, 255);"></textarea>
         </div>
 
         <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
             <div class="mb-3 row">
                 <label for="n_words" class="col-sm-2 col-form-label">Número de Palavras</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="n_words" value="0.0">
+                    <input type="text" readonly class="form-control-plaintext " id="n_words" value="0.0">
                 </div>
             </div>
 
@@ -376,4 +376,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
