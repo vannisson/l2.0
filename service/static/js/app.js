@@ -446,6 +446,7 @@ function checkText() {
     if (txt.length == 0) { $("#add_button").attr("disabled", "disabled"); } else { $("#add_button").attr("disabled", false); }
 }
 
+
 // UTILS
 //
 // Calculating the average/mean

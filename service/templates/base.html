@@ -39,12 +39,44 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link"><i class="fas fa-cog"></i>&nbsp;<del>Preferências</del></a></li>
-                <li class="nav-item"><a class="nav-link"><i class="fas fa-bug"></i>&nbsp;<del>Bugs?</del></a></li>
+                <li class="nav-item" style="cursor: pointer;"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-bug"></i>&nbsp;Bugs?</a></li>
             </ul>
         </header>
     </div>
 
-    <div id="content">{% block content %}{% endblock %}</div>
+    <!-- Bugs Form -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Reportar um problema</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Email:</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Problema:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                      </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Descrição do problema:</label>
+                      <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary" onclick="">Enviar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div id="content ">{% block content %}{% endblock %}</div>
 
     <footer class="text-center text-lg-start text-muted p-1">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
