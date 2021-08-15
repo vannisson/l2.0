@@ -87,6 +87,10 @@ def show_about_project():
 def show_about_people():
 		return render_template('about_people.html')
 
+@app.route('/error', methods=['GET'])
+def show_error():
+		return render_template('error.html')
+
 # API request reponses
 @analyze_ns.route("/")
 class MainClass(Resource):

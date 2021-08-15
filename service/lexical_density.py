@@ -42,7 +42,6 @@ class LexicalDensity(object):
         pos_verbs = 0
         pos_adj = 0
         pos_adv = 0
-        
 
         for wd in freq_dict:
             if (pos_dict[wd] == 'N' or pos_dict[wd] == 'NPROP'):
@@ -53,7 +52,7 @@ class LexicalDensity(object):
                 pos_adj += freq_dict[wd]
             elif (pos_dict[wd] == 'ADV' or pos_dict[wd] == 'ADV-KS' or pos_dict[wd] == 'ADV-KS-REL'):
                 pos_adv += freq_dict[wd]
-            
+
         return pos_subs, pos_verbs, pos_adj, pos_adv
 
     @staticmethod

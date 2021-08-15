@@ -11,8 +11,6 @@ function initPage() {
     if ($("#num_texts").text() >= 1) {
         $("#results_button").attr("disabled", false);
         $("#delete_button").attr("disabled", false);
-    } else {
-
     }
 }
 
