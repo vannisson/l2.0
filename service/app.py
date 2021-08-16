@@ -14,8 +14,8 @@ import joblib
 from nltk import word_tokenize
 
 from basic_metrics import BasicMetrics
-from lexical_diversity import LexicalDiversity
-from lexical_density import LexicalDensity
+from lex_diversity import LexicalDiversity
+from lex_density import LexicalDensity
 
 app = Flask(__name__)
 
@@ -104,7 +104,7 @@ class MainClass(Resource):
 
 	@api.expect(analyze_model)		
 	def post(self):
-		try: 
+		try:
 			formData = request.json
 			text = str(formData['text']).lstrip()
 			# Processing

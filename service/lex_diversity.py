@@ -1,4 +1,5 @@
 from basic_metrics import BasicMetrics
+from lexical_diversity import lex_div as ld
 
 class LexicalDiversity(object):
 
@@ -12,3 +13,8 @@ class LexicalDiversity(object):
     @staticmethod
     def vocD(text):
         pass
+
+    @staticmethod
+    def mtld(text):
+        pass
+
