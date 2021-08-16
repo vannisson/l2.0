@@ -294,10 +294,6 @@ function switch_production() {
 
 
             var frequencies = data.frequencies;
-            var tbodyRef = document.getElementById('details_table').getElementsByTagName('tbody')[0];
-            tbodyRef.innerHTML = '';
-
-            var cnt = 1
 
             var subs = 0;
             var verbs = 0;
@@ -306,6 +302,8 @@ function switch_production() {
             var pro = 0;
             var art = 0;
             var others = 0;
+
+            let detais_table_data = [];
 
             for (var wd in frequencies) {
                 // wd - word
@@ -343,8 +341,7 @@ function switch_production() {
                     others += frequencies[wd];
                 }
 
-                tbodyRef.innerHTML += '<tr><th scope="row">' + cnt + '</th><td>' + wd + '</td><td>' + pos_tag + '</td><td>' + frequencies[wd] + '</td></tr>'
-                cnt++
+                detais_table_data.push([wd, pos_tag, frequencies[wd]])
             }
 
             document.getElementById("subs_count").value = subs;
@@ -387,8 +384,19 @@ function switch_production() {
             pos_prod_pie.data = data_chart;
             pos_prod_pie.update();
 
+            if ($.fn.dataTable.isDataTable('#details_table')) {
+                $('#details_table').DataTable().destroy();
+            }
+        
             $('#details_table').DataTable({
-                retrieve: true,
+                responsive: true,
+                destroy: true,
+                data: detais_table_data,
+                columns: [
+                    {title: "Palavra"},
+                    {title: "Classificação"},
+                    {title: "Frequência"}
+                ],
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ palavras por página",
                     "zeroRecords": "Nada encontrado - Desculpa :(",
