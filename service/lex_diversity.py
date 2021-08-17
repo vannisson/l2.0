@@ -1,5 +1,5 @@
 from basic_metrics import BasicMetrics
-from lexical_diversity import lex_div as ld
+#from lexical_diversity import lex_div as ld
 
 class LexicalDiversity(object):
 

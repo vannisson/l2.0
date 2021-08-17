@@ -20,7 +20,8 @@ function analyze() {
         $("#loading").css("visibility", "visible");
     });
 
-    var txt = $("#text_box").val();
+    var txt = ($("#text_box").val()).replaceAll("-","");
+    console.log(txt)
 
 
 
@@ -34,7 +35,7 @@ function analyze() {
             text: txt
         }),
         success: function(data) {
-
+            console.log(data)
             $("#num_texts").text(parseInt($("#num_texts").text()) + 1);
             if ($("#num_texts").text() >= 1) {
                 $("#results_button").attr("disabled", false);
@@ -384,12 +385,16 @@ function switch_production() {
             pos_prod_pie.data = data_chart;
             pos_prod_pie.update();
 
+            
+
             if ($.fn.dataTable.isDataTable('#details_table')) {
+                $('#details_table').DataTable().clear();
                 $('#details_table').DataTable().destroy();
+                $('#details_table').empty();
             }
-        
+
             $('#details_table').DataTable({
-                responsive: true,
+                responsive:true,
                 destroy: true,
                 data: detais_table_data,
                 columns: [
@@ -414,7 +419,9 @@ function switch_production() {
                     },
                 }
             });
-
+        
+            
+            
             $(function() {
                 $("#loading").css("visibility", "hidden");
             });
