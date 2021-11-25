@@ -1,5 +1,6 @@
 import re
 from collections import Counter
+from lexical_diversity import lex_div as ld
 
 class BasicMetrics(object):
     
@@ -30,6 +31,11 @@ class BasicMetrics(object):
         words = BasicMetrics.wordsList(text)
         
         return len(words)
+
+    @staticmethod
+    def trueTokens(text):
+        words = BasicMetrics.wordsList(text)
+        return words
 
     @staticmethod
     def types(text):        

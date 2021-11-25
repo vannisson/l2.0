@@ -1,9 +1,12 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container pt-1 pb-2">
-  <div class="row ">
-      <div class="col-2"><a class="btn btn-primary " id="add_button_results" href="/index"><i class="fas fa-arrow-circle-left"></i>&nbsp;Voltar</a></div>
-      <div class="col"></div>
+  <div class="row">
+    <div class="col-2">
+      <a class="btn btn-primary" id="add_button_results" href="/index"
+        ><i class="fas fa-arrow-circle-left"></i>&nbsp;Voltar</a
+      >
+    </div>
+    <div class="col"></div>
   </div>
 </div>
 <div class="container p-1">
@@ -12,14 +15,21 @@
   </div>
   <div class="row p-4">
     <p class="text-center">
-      Parece que algo deu errado! Volte a página e tente novamente.
-      Se o problema persistir, reporte esse erro apertando o botão abaixo e aguarde 
+      Parece que algo deu errado! Volte a página e tente novamente. Se o
+      problema persistir, reporte esse erro apertando o botão abaixo e aguarde
       as próximas atualizações.
     </p>
   </div>
   <div class="row">
     <div class="col-4"></div>
-    <button class="btn btn-primary btn-lg col" id="bug_button" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fas fa-bug"></i>&nbsp;Reportar problema</button>
+    <button
+      class="btn btn-primary btn-lg col"
+      id="bug_button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      <i class="fas fa-bug"></i>&nbsp;Reportar problema
+    </button>
     <div class="col-4"></div>
   </div>
 </div>

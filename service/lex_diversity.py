@@ -1,5 +1,5 @@
 from basic_metrics import BasicMetrics
-#from lexical_diversity import lex_div as ld
+from lexical_diversity import lex_div as ld
 
 class LexicalDiversity(object):
 
@@ -11,10 +11,12 @@ class LexicalDiversity(object):
         return types*100/tokens
 
     @staticmethod
-    def vocD(text):
-        pass
+    def hdd_ld(text):
+        tokens = BasicMetrics.trueTokens(text)
+        return ld.hdd(tokens)*100
 
     @staticmethod
-    def mtld(text):
-        pass
+    def mtld_ld(text):
+        tokens = BasicMetrics.trueTokens(text)
+        return ld.mtld(tokens)
 

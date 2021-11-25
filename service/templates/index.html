@@ -6,17 +6,49 @@
             <textarea type="text" id="text_box" onchange="checkText()" class="form-control" placeholder="Digite aqui o seu texto" style="height: 25vw"></textarea>
         </div>
         <div class="col-3">
-            <label class="form-label" id="num_texts">{{ num_prod }}</label><label class="form-label">&nbsp;textos adicionados.</label>
+            <label class="form-label" id="num_texts">{{ num_prod }}</label><label class="form-label">&nbsp;textos adicionado(s).</label>
             <div class="d-grid gap-3 mx-auto">
-                <button disabled class="btn btn-primary btn-lg" id="add_button" onclick="analyze()"><i class="fas fa-plus-circle"></i>&nbsp;Adicionar à lista</button>
+                <button disabled class="btn btn-primary btn-lg" id="add_button" onclick="analyze()"><i class="fas fa-search"></i>&nbsp;Analisar texto</button>
                 <form class="d-grid" action="/results" method="post">
-                    <button disabled class="btn btn-primary btn-lg" id="results_button"><i class="fas fa-search"></i>&nbsp;Ver resultados</button>
+                    <button disabled class="btn btn-primary btn-lg" id="results_button"><i class="fas fa-chart-pie"></i>&nbsp;Ver resultados</button>
                 </form>
                 <button disabled class="btn btn-primary btn-lg" id="delete_button" onclick="delete_texts()"><i class="fas fa-minus-circle"></i></i>&nbsp;Remover produções</button>
+                <button class="btn btn-primary btn-lg" id="config_button" class="nav-link" data-bs-toggle="modal" data-bs-target="#configModal"><i class="fas fa-cog"></i></i>&nbsp;Configurar análise</button>
             </div>
         </div>
     </div>
 </div>
+</div>
+
+<div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="configModalLabel">Configuração:</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h5>Diversidade Lexical:</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="hdd" value="hdd" checked>
+              <label class="form-check-label" for="exampleRadios2">
+                HD-D
+              </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="mtld" value="mtld">
+                <label class="form-check-label" for="exampleRadios1">
+                  MTLD
+                </label>
+              </div>   
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
 </div>
 
 <div class="container" id="loading">

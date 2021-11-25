@@ -17,6 +17,8 @@ from basic_metrics import BasicMetrics
 from lex_diversity import LexicalDiversity
 from lex_density import LexicalDensity
 
+
+
 app = Flask(__name__)
 
 
@@ -44,7 +46,10 @@ delete_texts_ns = api.namespace('delete', description='Delete all the texts.')
 analyze_model = api.model('Analyze params', 
 				  {'text': fields.String(required = True, 
 				  							   description="Text", 
-    					  				 	   help="Text can not be blank")})
+    					  				 	   help="Text can not be blank"),
+						'dil_status':fields.String(required=True,
+														description="dil_status",
+														help="mltd is default")})
 
 prod_info_model = api.model('Production Info params', 
 				  {'production': fields.String(required = True, 
@@ -107,12 +112,16 @@ class MainClass(Resource):
 		try:
 			formData = request.json
 			text = str(formData['text']).lstrip()
+			dil_status = str(formData['dil_status'])
 			# Processing
 			n_lines = BasicMetrics.n_lines(text)
 			n_words = BasicMetrics.tokens(text)
 			types = BasicMetrics.types(text)
 			frequencies = dict(BasicMetrics.frequencies(text))
-			lexicalDiversity = LexicalDiversity.ttr(text)
+			if dil_status == "hdd":
+				lexicalDiversity = LexicalDiversity.hdd_ld(text)
+			else:
+				lexicalDiversity = LexicalDiversity.mtld_ld(text)
 			lexicalDensity = LexicalDensity.hallidayDel(text)
 			pos = dict(pos_tagger.tag(word_tokenize(text.lower())))
 			

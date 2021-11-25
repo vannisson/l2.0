@@ -38,39 +38,26 @@
                         <li class="nav-item"><a class="nav-link" href="/about_people"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;Pessoas</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link"><i class="fas fa-cog"></i>&nbsp;<del>Preferências</del></a></li>
-                <li class="nav-item" style="cursor: pointer;"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-bug"></i>&nbsp;Bugs?</a></li>
+                <li class="nav-item"><a class="nav-link"><i class="fas fa-eye"></i>&nbsp;<del>Acessibilidade</del></a></li>
+                <li class="nav-item" style="cursor: pointer;"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#bugsModal"><i class="fas fa-bug"></i>&nbsp;Bugs?</a></li>
             </ul>
         </header>
     </div>
 
     <!-- Bugs Form -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal fade" id="bugsModal" tabindex="-1" aria-labelledby="bugsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Reportar um problema</h5>
+              <h5 class="modal-title" id="bugsModalLabel">Entre em contato:</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                      <label for="email-space" class="col-form-label">Email:</label>
-                      <input type="text" class="form-control" id="email-problem">
-                    </div>
-                    <div class="mb-3">
-                        <label for="title-space" class="col-form-label">Problema:</label>
-                        <input type="text" class="form-control" id="title-problem">
-                      </div>
-                    <div class="mb-3">
-                      <label for="message-space" class="col-form-label">Descrição do problema:</label>
-                      <textarea class="form-control" id="text-problem"></textarea>
-                    </div>
-                </form>
+                <h5>Email:</h5>
+                <p><a><i class="fas fa-envelope-open-text text-primary">&nbsp;</i>&nbsp;geovane.filho@arapiraca.ufal.br</a></p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary" onclick="">Enviar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
             </div>
           </div>
         </div>
@@ -119,7 +106,7 @@
                             <a href="https://www.gov.br/cnpq/pt-br" target="_blank"><img src="{{ url_for('static',filename='img/logo_cnpq.svg') }}" alt="Cnpq-Logo" height="145" width="160" title="" media-simple="true"></a>
                         </div>
                         <div class="text-center">
-                            <a href="https://blog.mettzer.com/pibiti/" target="_blank"><img src="{{ url_for('static',filename='img/pibiti_logo.jpg') }}" alt="Pibiti-Logo" height="80" width="160" title="" media-simple="true"></a>
+                            <a href="https://blog.mettzer.com/pibiti/" target="_blank"><img src="{{ url_for('static',filename='img/pibiti_logo.jpg') }}" alt="Pibiti-Logo" height="60" width="160" title="" media-simple="true"></a>
                         </div>
                     </div>
 
