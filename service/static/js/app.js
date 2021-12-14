@@ -2,8 +2,8 @@ let pos_prod_pie;
 let general_line_chart;
 let pos_general_pie;
 
-url_ip = "localhost";
-//url_ip = '35.199.91.93'
+//url_ip = "localhost";
+url_ip = "34.95.147.116";
 
 window.onload = initPage;
 
